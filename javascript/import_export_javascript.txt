@@ -1,0 +1,36 @@
+//импортирующий скрипт должен быть подключен с type="module"
+<script type="module" src="js/main.js"></script> 
+
+//все функции доступные из вне нужно экспортировать
+calc.js:
+
+function add(x, y) {
+    return x + y;
+}
+
+export { add };
+export { add, multiply };
+или
+export function add(x, y) {
+    return x + y;
+}
+
+
+//далее можно импортировать
+import { add } from './calc.js';
+console.log(add(1, 2));
+
+//импортировать все функции из модуля
+import * as myMathModule from "./math_functions.js";
+The above import statement will create an object called myMathModule. This is just a variable name, you can name it anything. The object will contain all 
+of the exports from math_functions.js in it, so you can access the functions like you would any other object property. 
+
+//импортирование по умолчанию(всегда 1 объект)
+calc.js
+export default function subtrack(x, y) {
+    return x - y;
+}
+
+main.js
+import subtract from './calc.js';
+console.log(subtract(4, 1));

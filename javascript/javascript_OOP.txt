@@ -1,0 +1,64 @@
+Операция записи не использует прототип
+let animal = {
+  eats: true,
+  walk() {
+    /* этот метод не будет использоваться в rabbit */
+  }
+};
+let rabbit = {
+  __proto__: animal
+};
+
+rabbit.walk = function() {
+  alert("Rabbit! Bounce-bounce!");
+};
+rabbit.walk();
+
+walk находится в rabbit, а animal.walk скрывается.
+
+
+
+let obj = {};
+alert( obj ); // "[object Object]" ?
+Где код, который генерирует строку "[object Object]"? Это встроенный метод toString, но где он? obj ведь пуст!
+…Но краткая нотация obj = {} – это то же самое, что и obj = new Object(), где Object – встроенная функция-конструктор для объектов с
+собственным свойством prototype, которое ссылается на огромный объект с методом toString и другими.
+Когда вызывается new Object() (или создаётся объект с помощью литерала {...}), свойство [[Prototype]] этого объекта устанавливается
+на Object.prototype по правилам, которые мы обсуждали в предыдущей главе.
+
+
+Как мы помним, новые объекты могут быть созданы с помощью функции-конструктора new F().
+Если в F.prototype содержится объект, оператор new устанавливает его в качестве [[Prototype]] для нового объекта.
+Обратите внимание, что F.prototype означает обычное свойство с именем "prototype" для F. Это ещё не «прототип объекта», а обычное свойство
+F с таким именем. Т. е. у функции есть просто свойство prototype и [[Prototype]] == Array.
+F.prototype используется только при вызове new F() и присваивается в качестве свойства [[Prototype]] нового объекта. После этого 
+F.prototype и новый объект ничего не связывает. Следует понимать это как «единоразовый подарок» объекту.
+После создания F.prototype может измениться, и новые объекты, созданные с помощью new F(), будут иметь другой объект в 
+качестве [[Prototype]], но уже существующие объекты сохранят старый. 
+У каждой функции по умолчанию уже есть свойство "prototype".
+По умолчанию "prototype" – объект с единственным свойством constructor, которое ссылается на функцию-конструктор.
+function Rabbit() {}
+/* прототип по умолчанию
+Rabbit.prototype = { constructor: Rabbit };
+*/
+
+прототип копируется по ссылке из конструктотра
+
+Современные же методы это:
+
+Object.create(proto, [descriptors]) – создаёт пустой объект со свойством [[Prototype]], указанным как proto, и необязательными 
+дескрипторами свойств descriptors.
+Object.getPrototypeOf(obj) – возвращает свойство [[Prototype]] объекта obj.
+Object.setPrototypeOf(obj, proto) – устанавливает свойство [[Prototype]] объекта obj как proto.
+
+animal.isPrototypeOf(bird) - вляется ли animal prototype bird. 
+
+
+Inheritance:
+function Animal() { }
+Animal.prototype.eat = function() {
+  console.log("nom nom nom");
+};
+function Bird() { }
+Bird.prototype = Object.create(Animal.prototype);
+Bird.prototype.constructor = Bird;

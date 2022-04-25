@@ -1,0 +1,171 @@
+The let keyword behaves similarly, but with some extra features. When you declare a variable with the let keyword inside a block, 
+statement, or expression, its scope is limited to that block, statement, or expression.
+For example:
+var numArray = [];
+for (var i = 0; i < 3; i++) {
+  numArray.push(i);
+}
+console.log(numArray);
+console.log(i);
+Here the console will display the values [0, 1, 2] and 3.
+
+var printNumTwo;
+for (var i = 0; i < 3; i++) {
+  if (i === 2) {
+    printNumTwo = function() {
+      return i;
+    };
+  }
+}
+console.log(printNumTwo()); //3
+
+let printNumTwo;
+for (let i = 0; i < 3; i++) {
+  if (i === 2) {
+    printNumTwo = function() {
+      return i;
+    };
+  }
+}
+console.log(printNumTwo()); //2
+console.log(i); //i is not defined
+
+i is not defined because it was not declared in the global scope. It is only declared within the for loop statement. printNumTwo() 
+returned the correct value because three different i variables with unique values (0, 1, and 2) were created by the let keyword within 
+the loop statement.
+
+
+
+To ensure your data doesn't change, JavaScript provides a function Object.freeze to prevent data mutation.
+Any attempt at changing the object will be rejected, with an error thrown if the script is running in strict mode.
+let obj = {
+  name:"FreeCodeCamp",
+  review:"Awesome"
+};
+Object.freeze(obj);
+obj.review = "bad"; //error
+obj.newProp = "Test"; //error
+console.log(obj);
+
+
+
+const myFunc = function() {
+  const myVar = "value";
+  return myVar;
+}
+const myFunc = () => {
+  const myVar = "value";
+  return myVar;
+}
+const myFunc = () => "value";
+const multiplier = (item, multi) => item * multi;
+
+
+Default Parameters
+const greeting = (name = "Anonymous") => "Hello " + name;
+console.log(greeting("John")); //Hello John
+console.log(greeting()); //Hello Anonymous
+
+
+Rest parameters
+function Test(a, ...args) {
+    console.log(a);
+    console.log(args);
+}
+Test(1, 4, 4, 6);
+//1
+//[4, 4, 6]
+
+
+ES6 introduces the spread operator, which allows us to expand arrays and other expressions in places where multiple parameters or 
+elements are expected.
+const arr = [6, 89, 3, 45];
+const maximus = Math.max(...arr); //Math.max() expects comma-separated arguments, but not an array.
+
+
+let obj = { a: 1, b: 2, c: 3 };
+let { c, a } = obj;
+console.log(a); //1
+console.log(c); //3
+
+
+Destructuring allows you to assign a new variable name when extracting values. You can do this by putting the new name after a colon 
+when assigning the value.
+Using the same object from the last example:
+
+const user = { name: 'John Doe', age: 34 };
+Here's how you can give new variable names in the assignment:
+
+const { name: userName, age: userAge } = user;
+You may read it as "get the value of user.name and assign it to a new variable named userName" and so on. The value of userName would 
+be the string John Doe, and the value of userAge would be the number 34.
+
+
+//extracting nested object
+const user = {
+  johnDoe: { 
+    age: 34,
+    email: 'johnDoe@freeCodeCamp.com'
+  }
+};
+Here's how to extract the values of object properties and assign them to variables with the same name:
+const { johnDoe: { age, email }} = user;
+And here's how you can assign an object properties' values to variables with different names:
+const { johnDoe: { age: userAge, email: userEmail }} = user;
+
+Destructuring assignment for array.
+const [a, b] = [1, 2, 3, 4, 5, 6];
+console.log(a, b); //1, 2
+const [a, b,,, c] = [1, 2, 3, 4, 5, 6];
+console.log(a, b, c); //1, 2, 5
+Swap elements
+let a = 8, b = 6;
+[b, a] = [a, b];
+
+Use Destructuring Assignment with the Rest Parameter to Reassign Array Elements.
+const [a, b, ...arr] = [1, 2, 3, 4, 5, 7];
+console.log(a, b); //1, 2
+console.log(arr); //[3, 4, 5, 7]
+
+Use Destructuring Assignment to Pass an Object as a Function's Parameters
+const stats = {
+  max: 56.78,
+  standard_deviation: 4.34,
+  median: 34.54,
+  mode: 23.87,
+  min: -0.75,
+  average: 35.85
+};
+const half = ({ max, min }) => (max + min) / 2.0;
+
+
+const person = {
+  name: "Zodiac Hasbro",
+  age: 56
+};
+const greeting = `Hello, my name is ${person.name}!
+I am ${person.age} years old.`;
+console.log(greeting);
+//Hello, my name is Zodiac Hasbro!
+//I am 56 years old.
+//two strings
+
+
+let x = 1;
+let y = 2;
+Equal
+let obj1 = { x: x, y: y };
+let obj2 = { x, y };
+//{x: 1, y: 2}
+
+Write Concise Declarative Functions
+
+const person = {
+  name: "Taylor",
+  //sayHello: function() {
+  //  return `Hello! My name is ${this.name}.`;
+  //}
+  sayHello() {
+    return `Hello! My name is ${this.name}.`;
+  }
+};

@@ -1,0 +1,104 @@
+To import a Google Font, you can copy the font's URL from the Google Fonts library and then paste it in your HTML. For this challenge, we'll import the
+ Lobster font. To do this, copy the following code snippet and paste it into the top of your code editor (before the opening style element):
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+Now you can use the Lobster font in your CSS by using Lobster as the FAMILY_NAME as in the following example:
+
+font-family: FAMILY_NAME, GENERIC_NAME;
+The GENERIC_NAME is optional, and is a fallback font in case the other specified font is not available. This is covered in the next challenge.
+
+
+When one font isn't available, you can tell the browser to "degrade" to another font.
+For example, if you wanted an element to use the Helvetica font, but degrade to the sans-serif font when Helvetica isn't available, you will specify it as follows:
+p {
+  font-family: Helvetica, sans-serif;
+}
+
+
+An element's margin controls the amount of space between an element's border and surrounding elements.
+If you set an element's margin to a negative value, the element will grow larger
+
+
+Instead of specifying an element's padding-top, padding-right, padding-bottom, and padding-left properties individually, you can specify them all in one line, like this:
+padding: 10px 20px 10px 20px;
+These four values work like a clock: top, right, bottom, left, and will produce the exact same result as using the side-specific padding instructions.
+
+
+For this challenge, you will use the [attr=value] attribute selector to style the checkboxes in CatPhotoApp. This selector matches and styles elements with a 
+specific attribute value. For example, the below code changes the margins of all elements with the attribute type and a corresponding value of radio:
+[type='radio'] {
+  margin: 20px 0px 20px 0px;
+}
+
+
+Relative units, such as em or rem, are relative to another length value. For example, em is based on the size of an element's font. If you use it to set the font-size 
+property itself, it's relative to the parent's font-size.
+padding: 1.5em;
+
+
+Remember, you can style your body element just like any other HTML element, and all your other elements will inherit your body element's styles.
+
+
+Create an additional CSS class called blue-text that gives an element the color blue. Make sure it's below your pink-text class declaration.
+Apply the blue-text class to your h1 element in addition to your pink-text class, and let's see which one wins.
+Applying multiple class attributes to a HTML element is done with a space between them like this:
+class="class1 class2"
+Note: It doesn't matter which order the classes are listed in the HTML element.
+However, the order of the class declarations in the <style> section is what is important. The second declaration will always take precedence over the first. 
+Because .blue-text is declared second, it overrides the attributes of .pink-text.
+
+
+<h1 style="color: green;"> - inline style override css declaration (even id).
+
+color: red !important; - the most powerful way to override property. It overrides even inline declaration.
+
+Many people feel overwhelmed by the possibilities of more than 16 million colors. And it's difficult to remember hex code. Fortunately, you can shorten it.
+For example, red's hex code #FF0000 can be shortened to #F00. This shortened form gives one digit for red, one digit for green, and one digit for blue.
+This reduces the total number of possible colors to around 4,000. But browsers will interpret #FF0000 and #F00 as exactly the same color.
+
+Another color representation: rgb(0, 0, 0);
+background-color: rgb(255, 165, 0);
+
+
+
+CSS variables:
+To create a CSS variable, you just need to give it a name with two hyphens in front of it and assign it a value like this:
+.penguin {
+    --penguin-skin: gray;
+}
+//Use	
+.penguin-top {
+    background: var(--penguin-skin);
+}
+This will create a variable named --penguin-skin and assign it the value of gray. Now you can use that variable elsewhere in your CSS to change the value of other 
+properties to gray.
+When you create a variable, it is available for you to use inside the selector in which you create it. It also is available in any of that selector's descendants. 
+This happens because CSS variables are inherited, just like ordinary properties.
+To make use of inheritance, CSS variables are often defined in the :root element.
+:root is a pseudo-class selector that matches the root element of the document, usually the html element. 
+By creating your variables in :root, they will be available globally and can be accessed from any other selector in the style sheet.
+:root {
+    --penguin-belly: pink;
+}
+When you create your variables in :root they will set the value of that variable for the whole page.
+You can then overwrite these variables by setting them again within a specific selector.
+.penguin {
+    --penguin-belly: white;
+}
+
+When using your variable as a CSS property value, you can attach a fallback value that your browser will revert to if the given variable is invalid.
+Here's how you do it:
+background: var(--penguin-skin, black);
+
+
+
+
+This means that if you do want to provide a browser fallback, it's as easy as providing another more widely supported value immediately before your declaration. 
+That way an older browser will have something to fall back on, while a newer browser will just interpret whatever declaration comes later in the cascade.
+.red-box {
+    background: red;
+    background: var(--red-color);
+}
+
+
+
