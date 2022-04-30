@@ -1,0 +1,13 @@
+.container
+	display: flex
+	flex-direction: row, column, row-reverse, column-reverse
+	justify-content: flex-start, center, space-between, space-around, space-evenly
+      align-items: flex-start, center, flex-end, stretch, baseline
+      flex-wrap: nowrap, wrap, wrap-reverse - split container into multiple rows / columns, if there is no space enough.
+.item
+      flex-grow: 1, 2, ... - how devide free space
+      flex-shrink: 1, 2, ... - how shrink, if there is no space enough
+      flex-basis: px, em, % - base size before shinking or growing
+      flex: flex-grow flex-shrink flex-basis
+	order: 1, 2, ... - number in flow
+      align-self: center, flex-start, flex-end

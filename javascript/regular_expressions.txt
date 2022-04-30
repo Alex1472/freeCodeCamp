@@ -1,0 +1,161 @@
+The .test() method takes the regex, applies it to a string (which is placed inside the parentheses), and returns true or false if your pattern finds something or not.
+let testStr = "freeCodeCamp";
+let testRegex = /Code/;
+testRegex.test(testStr);
+
+You can search for multiple patterns using the alternation or OR operator: |.
+let petString = "James has a pet cat.";
+let petRegex = /dog|cat|bird|fish/;
+let result = petRegex.test(petString);
+
+You can match both cases using what is called a flag. There are other flags but here you'll focus on the flag that ignores case - the i flag. 
+You can use it by appending it to the regex.
+let myString = "freeCodeCamp";
+let fccRegex = /freecodecamp/i; 
+let result = fccRegex.test(myString);
+
+
+
+So far, you have only been checking if a pattern exists or not within a string. You can also extract the actual matches you found with the .match() method.
+To use the .match() method, apply the method on a string and pass in the regex inside the parentheses.
+"Hello, World!".match(/Hello/);
+let ourStr = "Regular expressions";
+let ourRegex = /expressions/;
+ourStr.match(ourRegex);
+
+let repeatRegex = /Repeat/g;
+testStr.match(repeatRegex);
+
+let humStr = "I'll hum a song";
+let hugStr = "Bear hug";
+let huRegex = /hu./;
+huRegex.test(humStr);
+huRegex.test(hugStr);
+
+You can search for a literal pattern with some flexibility with character classes. Character classes allow you to define a group of characters you 
+wish to match by placing them inside square ([ and ]) brackets.
+let bgRegex = /b[aiu]g/;
+
+Inside a character set, you can define a range of characters to match using a hyphen character: -.
+let bgRegex = /[a-e]at/;
+
+So far, you have created a set of characters that you want to match, but you could also create a set of characters that you do not want to match. 
+These types of character sets are called negated character sets.
+To create a negated character set, you place a caret character (^) after the opening bracket and before the characters you do not want to match.
+For example, /[^aeiou]/gi
+
+You can use the + character to check if that is the case. Remember, the character or pattern has to be present consecutively. 
+That is, the character has to repeat one after the other.
+
+There's also an option that matches characters that occur zero or more times.
+The character to do this is the asterisk or star: *.
+
+You can apply the regex /t[a-z]*i/ to the string "titanic". This regex is basically a pattern that starts with t, ends with i, and has some letters in between.
+Regular expressions are by default greedy, so the match would return ["titani"]. It finds the largest sub-string possible to fit the pattern.
+However, you can use the ? character to change it to lazy matching. "titanic" matched against the adjusted regex of /t[a-z]*?i/ returns ["ti"].
+
+You used the caret character (^) inside a character set to create a negated character set in the form [^thingsThatWillNotBeMatched]. 
+Outside of a character set, the caret is used to search for patterns at the beginning of strings.
+let firstString = "Ricky is first and can be found.";
+let firstRegex = /^Ricky/; 
+firstRegex.test(firstString); //true
+let notFirst = "You can't find Ricky now.";
+firstRegex.test(notFirst); //false
+
+You can search the end of strings using the dollar sign character $ at the end of the regex.
+let theEnding = "This is a never ending story";
+let storyRegex = /story$/; //true
+storyRegex.test(theEnding);
+let noEnding = "Sometimes a story will have to end";
+storyRegex.test(noEnding); //false
+
+The closest character class in JavaScript to match the alphabet is \w. This shortcut is equal to [A-Za-z0-9_]. 
+This character class matches upper and lowercase letters plus numbers. Note, this character class also includes the underscore character (_).
+
+You can search for the opposite of the \w with \W. Note, the opposite pattern uses a capital letter. This shortcut is the same as [^A-Za-z0-9_].
+let shortHand = /\W/;
+let numbers = "42%"; //["%"]
+let sentence = "Coding!"; //["!"]
+numbers.match(shortHand);
+sentence.match(shortHand);
+
+ou can specify the lower and upper number of patterns with quantity specifiers. Quantity specifiers are used with curly brackets ({ and }). 
+You put two numbers between the curly brackets - for the lower and upper number of patterns.
+let multipleA = /a{3,5}h/;
+
+
+Symbols:
+. - any character
++ - one or more characters  /a+/
+* - zero or more charecters /go*/
+? - zero or one character /colou?r/ //color and colour matches
+*? - lazy match /t[a-z]*?i/
+a{3, 5} - lower and upper character matches /a{3,5}h/
+a{3,} - only lower character matches /ha{3,}h/
+a{3} - exact number of matches /ha{3}h/
+
+[aiu] - any of characters
+[a-e] - any of the range
+[a-z0-9] - any letter or number
+[^aeiou] - not this characters
+[^aeiou0-9] - not a number or a vowel;
+
+Shortcuts:
+\w <=> [A-Za-z0-9_]
+\W <=> [^A-Za-z0-9_]
+\d <=> [0-9]
+\D <=> [^0-9]
+\s <=> [\r\t\f\n\v]
+\S <=> [^\r\t\f\n\v]
+
+/^Ricky/ - begins from (if not in [])
+/story$/ - ends with
+
+(?=...) - part after something(сразу) /q(?=u)/  =>  "qu" - ok
+(?!...) - there is no part after somegthing(сразу)  /q(?!u)/  =>  "qt" - ok, "qu" - wrong
+
+(a|b) - one of cases P(engu|umpk)in/g - Penguin / Pumpkin
+
+Flags:
+i - not case sensitive
+g - search all entries
+
+//specify all string with ^ and $. A string should match all, not only the beginning and the end.
+let str = "attt1";
+let numRegex = /^at*1$/; // Change this line
+let result = str.match(numRegex); //match
+numReged = /^a1$/;
+result = str.match(numReged); //do not match
+console.log(result);
+
+
+Capture groups:
+
+You could use /row row row/, but what if you don't know the specific word repeated? Capture groups can be used to find repeated substrings.
+Capture groups are constructed by enclosing the regex pattern to be captured in parentheses. In this case, the goal is to capture a word consisting of alphanumeric 
+characters so the capture group will be \w+ enclosed by parentheses: /(\w+)/.
+The substring matched by the group is saved to a temporary "variable", which can be accessed within the same regex using a backslash and the number of the capture 
+group (e.g. \1). Capture groups are automatically numbered by the position of their opening parentheses (left to right), starting at 1.
+The example below matches a word that occurs thrice separated by spaces:
+
+let repeatStr = "row row row your boat";
+let repeatRegex = /(\w+) \1 \1/;
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["row row row", "row"]
+
+Replace:
+
+Searching is useful. However, you can make searching even more powerful when it also changes (or replaces) the text you match.
+You can search and replace text in a string using .replace() on a string. The inputs for .replace() is first the regex pattern you want to search for. 
+The second parameter is the string to replace the match or a function to do something.
+
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue");
+The replace call would return the string The sky is blue..
+
+You can also access capture groups in the replacement string with dollar signs ($).
+"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
+The replace call would return the string Camp Code.
+
+
