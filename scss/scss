@@ -1,0 +1,290 @@
+VARIABLES
+
+.scss
+
+$primary-color: orange;
+
+body {
+    background-color: $primary-color;
+}
+
+compiled into:
+body {
+    background-color: orange;
+}
+
+
+
+MAPS
+Key-value pair
+$text-weights : (
+    "regular": 400, 
+    "medium": 600,
+    "bold": 800
+);
+body {
+    font-weight: map-get($text-weights, bold);
+}
+
+compiled into:
+body {
+  font-weight: 800;
+}
+
+
+NESTING
+
+.main {
+    width: 80%;
+    margin: 0 auto;
+    color: $text-color;
+
+    p {
+        font-weight: map-get($text-weights, bold);
+        &:hover {
+            color: pink;
+        }
+    }
+}
+.main {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+}
+.main p {
+  font-weight: 800;
+}
+.main p:hover {
+  color: pink;
+}
+
+
+.main {
+    width: 80%;
+    margin: 0 auto;
+    color: $text-color;
+
+    #{&}_p {
+        font-weight: map-get($text-weights, bold);
+
+        &:hover {
+            color: pink;
+        }
+    }
+}
+.main {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+}
+.main .main_p {
+  font-weight: 800;
+}
+.main .main_p:hover {
+  color: pink;
+}
+
+
+.main {
+    width: 80%;
+    margin: 0 auto;
+    color: $text-color;
+
+    .main_p {
+        font-weight: map-get($text-weights, bold);
+
+        &:hover {
+            color: pink;
+        }
+    }
+}
+.main {
+  width: 80%;
+  margin: 0 auto;
+  color: white;
+}
+.main .main_p {
+  font-weight: 800;
+}
+.main .main_p:hover {
+  color: pink;
+}
+
+
+
+
+PARTIALS:
+We can move some code pieces to another file. Use _ so that the file won't be compiled into css(it should be just include to another scss file). 
+
+_resets.scss
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main.scss
+@import './resets'; - include file (do not write _ and .scss)
+
+main.css
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+FUNCTIONS:
+$text-weights : (
+    "regular": 400, 
+    "medium": 600,
+    "bold": 800
+);
+@function get-weight($text-weight) {
+    @return map-get($text-weights, $text-weight);
+}
+
+body {
+    font-weight: get-weight(medium);
+}
+
+
+
+
+MIXINS:
+Mixins define styles.
+
+main.scss
+@mixin display-flex($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+.main {
+    @include display-flex(row);
+}
+
+main.css
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+
+@mixin text-effect($val) {
+  @if $val == danger {
+    color: red;
+  } @else if $val == alert {
+    color: yellow;
+  } @else if $val == success {
+    color: green;
+  } @else {
+    color: black;
+  }
+}
+
+@for usually used for generating classes
+main.scss
+@for $i from 1 to 6 {
+    .text-#{$i} { font-size: $i * 15px }
+}
+main.css
+.text-1 {
+  font-size: 15px;
+}
+.text-2 {
+  font-size: 30px;
+}
+.text-3 {
+  font-size: 45px;
+}
+.text-4 {
+  font-size: 60px;
+}
+.text-5 {
+  font-size: 75px;
+}
+
+
+@each
+@each $color in blue, black, red {
+    .#{$color}-bg { background-color: $color; }
+}
+.blue-bg {
+  background-color: blue;
+}
+.black-bg {
+  background-color: black;
+}
+.red-bg {
+  background-color: red;
+}
+
+with map
+$colors: (color1: blue, color2: red, color3: green);
+@each $key, $color in $colors {
+  .#{$color}-text {color: $color;}
+}
+
+main.scss
+$i: 1;
+@while $i < 6 {
+  .text-#{$i} { font-size: 15px * $i; }
+  $i: $i + 1;
+}
+
+main.css
+.text-1 {
+  font-size: 15px;
+}
+.text-2 {
+  font-size: 30px;
+}
+.text-3 {
+  font-size: 45px;
+}
+.text-4 {
+  font-size: 60px;
+}
+.text-5 {
+  font-size: 75px;
+}
+
+main.scss
+.info{
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+.info-important {
+    @extend .info;
+    background-color: magenta;
+}
+
+main.css
+.info, .info-important {
+  width: 200px;
+  border: 1px solid black;
+  margin: 0 auto;
+}
+.info-important {
+  background-color: magenta;
+}
+
+
+

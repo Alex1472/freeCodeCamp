@@ -42,4 +42,8 @@ fixed:
 delete from layout flow
 position absolute relative to window
 
+sticky:
+do not delete from layout flow
+position absolute relative to window but bordered by container
+stick only while scrolling container
 between inline(inline-block) elements there is a whitespace.
