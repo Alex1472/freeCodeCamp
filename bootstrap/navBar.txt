@@ -1,0 +1,22 @@
+Add popper scripts!!!
+
+Copy the example from docs and adjust it.
+dark theme: .navbar-dark .bg-dark
+.fixed-top for fixed position
+
+external content for use hamburger outside of navbar-brand
+side panel with offcanvas
+
+Nabs and tabs
+.nav
+.nav-tabs
+.nav-pills
+
+<nav>
+.navbar-brand - adjust links
+.navbar-dark .bg-dark - dark theme
+.fixed-top - position: fixed
+
+
+See documentation nav and tabs
+

@@ -1,0 +1,3 @@
+.form-label - for labels
+.form-control - for inputs
+.form-floating - for interesting combining label and input

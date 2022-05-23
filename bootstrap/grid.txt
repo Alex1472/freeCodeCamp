@@ -1,0 +1,51 @@
+Breakpoints
+
+Extra small	<576px
+Small	sm	≥576px
+Medium	md	≥768px
+Large	lg	≥992px
+Extra large	xl	≥1200px
+Extra extra large	xxl	≥1400px
+
+
+Responsive container that use breakpoints
+.container	
+.container-sm	
+.container-md	
+.container-lg	
+.container-xl	
+.container-xxl	
+.container-fluid - always width 100%
+
+GRID
+.col - all colums with equal size
+<div class="container">
+	<div class="row">
+		<div class="col">
+			col 1
+		</div>
+		<div class="col">
+			col 2
+		</div>
+	</div>
+</div>
+
+.col-auto - fit content
+.col-bp-num - specify column size from breakpoint
+.col-lg-6
+.col-sm-4
+
+Before the smallest size you specified this column will occupy all row. Columns will stack.
+
+
+class="row align-items-end" - align columns vertically
+class="col align-self-start" - align column within row
+class="row justify-content-center" - align columns horizontally within row
+
+If more than 12 columns are placed within a single row, each group of extra columns will, as one unit, wrap onto a new line.
+
+Offset from previous column
+<div class="row">
+   <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>
+   <div class="col-md-3 offset-md-3">.col-md-3 .offset-md-3</div>
+</div>

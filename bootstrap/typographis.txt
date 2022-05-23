@@ -1,0 +1,10 @@
+Bootstrap comes with predefined style for tags. For example, for h1, h2, ...
+Apply this style for simple text
+<p class="h1">Some text</p>
+
+List without markers
+<ul class="list-unstyled">
+	<li>Line number 1</li>
+	<li>Line number 2</li>
+	<li>Line number 3</li>
+</ul>
