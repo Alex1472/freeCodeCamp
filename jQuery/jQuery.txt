@@ -1,0 +1,49 @@
+Add a script element at the top of your page
+<script>
+  $(document).ready(function() {
+  });
+</script>
+document.ready function ensures that your script will run after your HTML is rendered.
+More new way to do this:
+$(function() {
+	//do something
+});
+
+
+$("button").addClass("animated bounce"); - add classes animated and bounce to all buttons
+$(".well").addClass("animated shake"); - target elements by class
+$("#target3").addClass("animated fadeOut"); - target elements by id
+
+
+Remove class from element:
+$("button").removeClass("btn-default");
+
+
+Add or change css property:
+$("#target1").css("color", "red");
+Add or change html property:
+$("#target1").prop("disabled", true);
+
+
+Add html code inside an element:
+$("#target4").html("<em>#target4</em>");
+Remove html element:
+$("#target4").remove();
+Move element into another element:
+$("#target2").appendTo("#right-well");
+Clone html element:
+$("#target5").clone().appendTo("#left-well");
+
+
+Get parent element:
+$("#target1").parent().css("background-color", "red");
+Get children elements:
+$("#right-well").children().css("color", "orange");
+The target:nth-child(n) CSS selector allows you to select all the nth elements with the target class or element type.
+$(".target:nth-child(2)").addClass("animated bounce"); //all second elements with class target
+Select even or odd elements
+Note that jQuery is zero-indexed which means the first element in a selection has a position of 0. This can be a little confusing as, counter-intuitively, 
+:odd selects the second element (position 1), fourth element (position 3), and so on.
+$(".target:even").addClass("animated shake");
+
+

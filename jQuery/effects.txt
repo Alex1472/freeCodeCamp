@@ -1,0 +1,50 @@
+You can hide and show elements with .hide and .show.
+$(function() {
+    $("#hideBtn").click(function() {
+        $("p").hide();
+    });
+    $("#showBtn").click(function() {
+        $("p").show();
+    });
+});
+
+You can use animation for hidding and specify time.
+$("#testBtn").click(function() {
+	$("p").hide(1000);
+	$("p").show(1000);
+	
+	
+	$("p").hide("slow");
+	$("p").show("fast");
+});
+
+You can speficy a kind of animation
+$("p").slideUp("slow");
+$("p").slideDown("fast");
+
+$("p").fadeOut("slow");
+$("p").fadeIn("fast");
+
+Toggle shows or hide element based on its current state.
+$("p").toggle(1000);
+
+
+
+The class will be added at the start of the animation.
+$("p").fadeIn(2000).addClass("blue");
+
+The class wil be added at the end of the animation. The second parameter is a callback function.
+$("p").fadeIn(2000, function() {
+	$(this).addClass("blue");
+})
+
+Stop current animation
+$("p").stop();
+
+
+You can delay an animation
+$("p").hide(2000);
+$("p").delay(2000);
+$("p").show(2000);
+
+$("p").hide(2000).delay(2000).show(2000);

@@ -1,0 +1,21 @@
+.animate(properties, [duration], [easing], [complete]);
+properties - propeties that you want to change
+duration - duration of the animation
+easing - kind of animation
+complete - callback that invokes when animation will complete
+
+$("#testBtn").click(function() {
+	$("#testDiv").animate({
+		marginLeft: "+=50",
+		opacity: .5
+	}, 4000, "linear", function() {
+		$(this).after("<div>Animation complete</div>");
+	} );
+});
+//after adds div-block into html
+
+You can use chane-rule for several animation 
+$("#testDiv")
+	.animate({ marginLeft: "+=50" }, 4000)
+	.animate({ marginLeft: "+=50" }, 1000)
+	.animate({ marginLeft: "+=50" }, 4000);

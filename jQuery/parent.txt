@@ -1,0 +1,78 @@
+<div class="container">
+	<div>
+		div
+		<ul>ul
+			<li>li
+				<span class="parent">
+					<p>p</p>
+					<span class="child">span</span>
+					<h2>h2</h2>
+					<h3>h3</h3>
+					<p>p</p>
+				</span>
+			</li>
+		</ul>
+	</div>
+</div>
+
+PARENTS:
+Get parent element:
+$("ul").parent().css({
+	border: "2px solid red"
+});
+Get all parents(of all levels):
+$("span").parents().css({
+	border: "2px solid red"
+})
+Parents until element in specified element:
+$("h2").parentsUntil("div").css({ //until parent element is div
+	border: "2px solid red"
+})
+
+
+CHILDREN:
+
+Get only first level children:
+$("li").children().css({
+	border: "2px solid red"
+})
+$("span").children().css({
+	border: "2px solid red"
+})
+Specify child kind:
+$("span").children("h3").css({
+	border: "2px solid red"
+})
+Get childrens of all levels:
+$("ul").find("span").css({
+	border: "2px solid red"
+})
+Get all children of all levels:
+$("ul").find("*").css({
+	border: "2px solid red"
+})
+
+
+SIBLINGS:
+$("h3").siblings().css({
+	border: "2px solid red"
+})
+$("h3").siblings("p").css({
+	border: "2px solid red"
+})
+Get next sibling element:
+$("h2").next().css({
+	border: "2px solid red"
+})
+Get all next elements:
+$("h2").nextAll().css({
+	border: "2px solid red"
+})
+Get all next elements until specified kind of element.
+$("span.child").nextUntil("p").css({
+	border: "2px solid red"
+})
+
+The same way works prev, prevAll, prevUntil methods.
+
+

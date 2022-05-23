@@ -1,0 +1,24 @@
+Use css method to get and set value of css property.
+With get it returns value of first suitable method.
+console.log($("p").css("font-size"));
+
+You can specify class of suitable element.
+console.log($("p.big").css("font-size")); //p with class big
+
+Set property:
+$("p").css("font-size", "100px");
+
+You can set multiple property:
+$("p").css({
+	fontSize: "100px",
+	color: "orange"
+});
+
+Add class to elements using addClass method:
+$("p").addClass("red");
+Remove class from elements using removeClass method:
+$("p").removeClass("red");
+Add or remove class using toggleClass method (base of current state).
+
+Check if element has paticular class
+console.log($("p").hasClass("red"));
