@@ -1,0 +1,119 @@
+npm -v   - version
+npm --veriosn   - version
+npm <=> npm help  - help
+
+
+
+PACKAGE.json
+Manifest + dependencies + Npm scripts
+
+npm init - create package.json
+npm init -y <=> npm init --yes   - init with default values
+
+Specify default package.json values. (when run npm init -y)
+npm config set init-author-name "Alexander Petrovskiy"
+npm config set init-license "MIT"
+You can leave out config: npm set init-author-name "Alexander Petrovskiy"
+
+Get default package.json values.
+npm config get init-author-name
+npm config get init-license
+You can leave out config.
+
+Revert to default value
+npm config delete init-author-name
+npm config delete init-license
+
+
+INSTALLING PACKAGES
+npm install package-name --save
+npm install lodash --save
+It will install in node_modules/lodash folder
+
+--save adds dependencies to package.json
+"dependencies": {
+    "lodash": "^4.17.21"
+}
+
+Create "main": "index.js" from package.json
+index.js:
+const _ = require("lodash");
+let numbers = [1, 5, 7, 2, 10, 4, 8];
+_.each(numbers, function(x, i) {
+    console.log(x);
+});
+Run it:
+node index.js
+
+npm install - install all package.json dependencies.
+
+
+DEVDEPENDECIES
+You can install package as devDependency - a dependency that uses only during development
+npm install gulp gulp-sass --save-dev  - install gulp and gulp-sass as devDependency
+In package.json
+"devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0"
+}
+
+npm install - install all dependencies
+npm install --production - install only regular dependencies not dev.
+
+
+REMOVE DEVDEPENDECIES
+npm (uninstall / un / remove / rm) gulp-sass --save (--save-dev - for devDependencies).
+
+INSTALL SPECIFIC VERSION
+npm install lodash@4.17.19
+
+UPDATE TO THE LATEST VERSION
+npm update lodash --save (save is important)
+
+
+
+SEMATIC VERSIONING
+8.3.5
+8 - Major version (API breaking changes)
+3 - Minor version (New features, do not break API)
+5 - Bug fixes (patch verison)
+
+^5.1.0
+^ means we will install the latest minor version (not major, for example 6.2.3 will not be installed)
+~5.1.0 - will only update patch version
+5.1.0 - install always this version
+"*" - install always the latest version
+
+
+
+GLOBAL MODULES
+Global modules will be installed on the machine not in your project.
+
+npm root -g //folder for global modules
+npm install nodemon -g //install global module
+npm rm nodemon -g //remove global module
+
+
+npm list - show project dependecies (top level)
+npm list -all - show all dependency tree
+npm list --depth 2 - show 2 levels of the dependency tree
+
+
+
+SCRIPTS
+In package.json
+"scripts": {
+    "dev": "node index.js"
+}
+
+You can run:
+npm run dev;
+
+If it has names start or test, you can run just
+npm start / npm test
+
+
+
+
+
+
