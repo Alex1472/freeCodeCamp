@@ -1,0 +1,147 @@
+use REPL to evaluate javascript in console
+enter "node"
+enter javascript
+Ctrl + C - to exit
+
+
+
+node index.js (node index) - run js-file
+
+
+In node.js every .js file is a module. To export it to another file you should use require function.
+You can set different properties to exports object and than use it in another module.
+
+test.js
+exports.hello = function(name) { console.log(`Hello ${name}`);} ;
+
+index.js
+const test_module = require("./test"); //get exports object
+test_module.hello("Alex");
+
+Also you can set exports object.
+test.js
+module.exports = { name: "Alex", age: 25, hello: function() { console.log("Hello!"); };
+
+index.js
+const test_module = require("./test");
+console.log(test_module.name);
+console.log(test_module.age);
+test_module.hello();
+
+
+
+PATH MODULE
+
+const path = require("path");
+console.log(__filename);
+
+//name of the file
+console.log(path.basename(__filename));
+//directory name == __dirname
+console.log(path.dirname(__filename));
+//extention
+console.log(path.extname(__filename));
+//join path segments
+console.log(path.join(__dirname, "test", "hello.txt"));
+//get object with basename, dirname, ext, root and name.
+console.log(path.parse(__filename));
+
+
+
+FILESYSTEM MODULE
+
+const path = require('path');
+const fs = require('fs');
+
+All this methods by default are asyncronous. You can use callback function.
+
+//Make directory, 
+fs.mkdir(path.join(__dirname, "test"), {}, err => {
+    if(err) throw err;
+    console.log("Folder created");
+});
+
+//Create file
+fs.writeFile(path.join(__dirname, "test", "hello.txt"), "Hello world!" , err => {
+    if(err) throw err;
+    console.log("File written...");
+});
+
+//Append data to file.
+fs.appendFile(path.join(__dirname, "test", "hello.txt"), " I love node.js!", err => {
+    if(err) throw err;
+    console.log("Data appended");
+});
+
+//Read file
+fs.readFile(path.join(__dirname, "test", "hello.txt"), "utf8", (err, data) => {
+    if(err) throw err;
+    console.log(data);
+});
+
+//Rename file
+fs.rename(path.join(__dirname, "test", "hello.txt"), path.join(__dirname, "test", "helloworld.txt"), err => {
+    if(err) throw err;
+    console.log("File renamed!");
+});
+
+
+
+
+OS MODULE
+
+const os = require("os");
+
+console.log(os.platform());
+
+console.log(os.arch());
+
+console.log(os.totalmem());
+
+console.log(os.freemem());
+
+console.log(os.homedir());
+
+console.log(os.cpus());
+
+
+
+
+URL MODULE
+
+const url = require("url");
+
+let myUrl = new URL("http://myWebsite.com/hello.html?active=true&id=100");
+
+console.log(myUrl.href);
+console.log(myUrl.toString());
+console.log(myUrl.host);
+console.log(myUrl.hostname);
+console.log(myUrl.pathname);
+console.log(myUrl.search);
+console.log(myUrl.searchParams);
+
+myUrl.searchParams.append("param", "data");
+console.log(myUrl.search);
+
+myUrl.searchParams.forEach((name, value) => console.log(`Name: ${name} Value: ${value}`));
+
+
+
+
+EVENTS MODULE
+
+Much of the Node.js core API is built around an idiomatic asynchronous event-driven architecture in which certain kinds of objects (called "emitters") emit named events that 
+cause Function objects ("listeners") to be called.
+
+const EventEmitter = require("events");
+
+class MyEventEmitter extends EventEmitter { }
+
+let eventEmitter = new MyEventEmitter();
+
+eventEmitter.on("event", () => console.log("Event fired!"));
+eventEmitter.emit("event");
+eventEmitter.emit("event");
+eventEmitter.emit("event");
+eventEmitter.emit("event");

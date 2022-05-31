@@ -1,0 +1,3 @@
+.img-fluid - proporitional size fitted all space along horizontally
+.img-thumbnail - add border around the image
+.rounded - round image

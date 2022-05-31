@@ -51,6 +51,7 @@ npm install - install all package.json dependencies.
 DEVDEPENDECIES
 You can install package as devDependency - a dependency that uses only during development
 npm install gulp gulp-sass --save-dev  - install gulp and gulp-sass as devDependency
+npm install -D gulp gulp-sass (--save-dev == -D)
 In package.json
 "devDependencies": {
     "gulp": "^4.0.2",

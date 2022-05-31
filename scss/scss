@@ -266,6 +266,8 @@ main.css
 }
 
 main.scss
+
+@INHERITANCES
 .info{
     width: 200px;
     border: 1px solid black;
