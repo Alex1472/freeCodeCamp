@@ -1,0 +1,6 @@
+console.log("Some text");
+console.clear();
+
+typeof
+typeof [] //array is object
+typeof {} //object
