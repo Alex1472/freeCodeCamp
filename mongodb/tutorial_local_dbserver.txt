@@ -1,0 +1,5 @@
+You can run server with mongod command in terminal. 
+You can connect to this server with mongo command in terminal. 
+You should path to path variable.
+
+Use connection string "mongodb://localhost/databaseName" to connect to local server. databaseName can be any name.

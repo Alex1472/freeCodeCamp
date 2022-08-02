@@ -1,0 +1,215 @@
+Mongo Atlas - cloud data base
+
+Use mongosh in terminal.
+
+mongosh --version
+use mongosh with connection string to connect.(Give it from mongo atlas).
+mongosh "mongodb+srv://cluster0.1p3np.mongodb.net/myFirstDatabase" --apiVersion 1 --username Alex147
+
+Check monosh Version
+mongosh --version
+
+Start the Mongo Shell
+mongosh "YOUR_CONNECTION_STRING" --username YOUR_USER_NAME
+
+
+
+
+Show Current Database
+db
+
+Show All Databases
+show dbs
+
+Create Or Switch Database
+use blog
+
+Drop Database
+db.dropDatabase()
+
+
+
+
+Create Collection
+db.createCollection('posts')
+
+Show Collections
+show collections
+
+
+
+Insert Document
+db.posts.insertOne({
+  title: 'Post 1',
+  body: 'Body of post.',
+  category: 'News',
+  likes: 1,
+  tags: ['news', 'events'],
+  date: Date()
+})
+
+Insert Multiple Documents
+db.posts.insertMany([
+  {
+    title: 'Post 2',
+    body: 'Body of post.',
+    category: 'Event',
+    likes: 2,
+    tags: ['news', 'events'],
+    date: Date()
+  },
+  {
+    title: 'Post 3',
+    body: 'Body of post.',
+    category: 'Tech',
+    likes: 3,
+    tags: ['news', 'events'],
+    date: Date()
+  },
+  {
+    title: 'Post 4',
+    body: 'Body of post.',
+    category: 'Event',
+    likes: 4,
+    tags: ['news', 'events'],
+    date: Date()
+  },
+  {
+    title: 'Post 5',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 5,
+    tags: ['news', 'events'],
+    date: Date()
+  }
+])
+
+
+
+
+Find All Documents
+db.posts.find()
+
+Find Documents with Query
+db.posts.find({ category: 'News' })
+
+Use only name and contribs fields of all objects.
+db.bios.find( { }, { name: 1, contribs: 1 } )
+
+Sort Documents Ascending
+db.posts.find().sort({ title: 1 })
+
+Descending db.posts.find().sort({ title: -1 })
+
+Count Documents
+db.posts.find().count()
+
+db.posts.find({ category: 'news' }).count()
+
+Limit Documents
+db.posts.find().limit(2)
+
+Chaining
+db.posts.find().limit(2).sort({ title: 1 })
+
+Find One Document
+db.posts.findOne({ likes: { $gt: 3 } })
+{ $gt : 3 } - likes greate then 3
+{ $lt : 3 } - likes less then 3
+
+
+
+
+Update Document
+db.posts.updateOne({ title: 'Post 1' },
+{
+  $set: {
+    category: 'Tech'
+  }
+})
+Update category in first object with title == 'Post 1'
+
+Update Document or Insert if not Found
+db.posts.updateOne({ title: 'Post 6' },
+{
+  $set: {
+    title: 'Post 6',
+    body: 'Body of post.',
+    category: 'News'
+  }
+},
+{
+  upsert: true
+}) - upsert : true, update if it found, else insert.
+
+
+Increment Field ($inc)
+db.posts.updateOne({ title: 'Post 1' },
+{
+  $inc: {
+    likes: 2
+  }
+})
+
+Update Multiple Documents
+db.posts.updateMany({}, {
+  $inc: {
+    likes: 1
+  }
+}) - inc all likes.
+
+Rename Field
+db.posts.updateOne({ title: 'Post 2' },
+{
+  $rename: {
+    likes: 'views'
+  }
+})
+
+
+
+
+Delete a Document
+db.posts.deleteOne({ title: 'Post 6' 
+
+Delete Multiple Documents
+db.posts.deleteMany({ category: 'Tech' })
+
+
+
+Greater & Less Than
+db.posts.find({ views: { $gt: 2 } })
+db.posts.find({ views: { $gte: 7 } })
+db.posts.find({ views: { $lt: 7 } })
+db.posts.find({ views: { $lte: 7 } })
+
+
+
+
+Use Compass - GUI for mongodb.
+You can use aggregation pipeline to perform data transformation and aggregation.
+db.listingsAndReviews.aggregate([ 
+	{ '$match': 
+		{ 
+		  'accommodates': { '$gt': 4 }, 
+		  'price': { '$lt': 30 }, 
+		  'amenities': 'Hair dryer' 
+		} 
+    }, 
+	{ '$sort': 
+	    { 'price': 1 } 
+	}, 
+	{ '$project': 
+	    { 
+		  'name': 1, 
+	      'price': 1, 
+		  'images': 1
+		} 
+	}, 
+	{ '$limit': 2 }
+])
+$match means filter by criteria
+$project means use only defined fields further.
+
+
+to use a database in your application modify example in the connect section.

@@ -1,0 +1,86 @@
+import { MongoClient } from "mongodb";
+
+const url = "mongodb://localhost/"
+const client = new MongoClient(url);
+
+const run = async () => {
+    try {
+		await client.connect(); //connect to cluster
+		
+		const db = client.db("test"); //create instance of db
+		
+		const result = await db.command({ping : 1}); //test connection
+		
+		const collection = db.collection("blogs"); //create instance of collection
+		
+		const data = await collection.find().toArray();
+	} catch (err) {
+	    console.log(err);
+	} finally {
+		await client.close();
+	}
+}
+
+run();
+
+
+You can use callback:
+client.connect(async (err, client) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    const db = client.db("test");
+    const result = await db.command({ ping: 1 });
+    console.log(result);
+    const collection = db.collection("blogs");
+    const data = await collection.find().toArray();
+    console.log(data);
+});
+
+
+
+Insert:
+
+const result = await collection.insertOne({
+	title: "Post 2",
+	content: "content 2",
+});
+const result = await collection.insertMany([
+	{ title: "Post 2", content: "content 2" },
+	{ title: "Post 3", content: "content 3" },
+]);
+
+
+Find:
+
+const data = await collection.find().toArray(); //get all objects
+const data = await collection.find({ title: "Post 2" }).toArray(); - filter 
+const data = await collection
+	.find({ title: "Post 2", content: "content 2" }) //filter with multiple criterias
+	.toArray();
+	
+const data = await collection.findOne({ title: "Post 3" }); //find first suitable document
+
+
+Delete:
+
+await collection.deleteOne({ title: "title" }); //delete first document which matches the criterias
+await collection.deleteMany({ title: "Post 3" }); 
+const result = await collection.findOneAndDelete({age: 21}); //delete object and return it
+
+const result = await collection.drop(); //delete collection
+
+
+Update
+await collection.updateOne(
+	{ title: "Post 2" },
+	{ $set: { test: "test" } }
+);
+await collection.updateMany(
+	{ title: "Post 2" },
+	{ $set: { test1: "test1" } }
+);
+
+
+

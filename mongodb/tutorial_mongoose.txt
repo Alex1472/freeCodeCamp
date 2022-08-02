@@ -1,0 +1,185 @@
+import mongoose from "mongoose";
+import User from "./user.js";
+
+mongoose.connect(
+	"mongodb://localhost/testdb",
+    () => console.log("Connected to database"),
+    (e) => console.log(e)
+);
+//connect to database (testdb)
+
+const user1 = new User({ name: "Alex", age: 23});
+await user1.save(); //save to database
+
+const user2 = await User.create({ name: "Tom", age: 20}); //create and save to database
+
+
+user.js
+
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+    name: String,
+	age: Number
+}); //schema of an item in the collection
+
+const user = mongoose.model("users", userSchema); //users - collection in database
+
+export default user;
+
+
+
+More complex schema.
+
+let userSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    createdAt: Date,
+    bestFriend: mongoose.SchemaTypes.ObjectId,
+    hobbies: [String], //array
+    address: {         //nested object
+        street: String,
+        home: Number,
+    },
+});
+
+const user = new User({
+	name: "Tom",
+	age: 33,
+	hobbies: ["weightlifting", "bowling"],
+	address: {
+		street: "aaa",
+		home: 34,
+	},
+});
+
+
+You can use nested schemas.
+const addressSchema = new mongoose.Schema({
+    street: String,
+    home: Number,
+});
+
+const userSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    createdAt: Date,
+    bestFriend: mongoose.SchemaTypes.ObjectId,
+    hobbies: [String],
+    address: addressSchema,
+});
+
+
+Validation.
+You can define an objece instead of just a type to carry out validation.
+
+const userSchema = new mongoose.Schema({
+    name: {
+	    type: String,
+		immutable: true, //you can't change this value. But exception will not occurs.
+	}
+    age: Number,
+    email: {
+        type: String,
+        required: true, //this field should always be
+        lowercase: true, //will be converted to lowercase
+		minLength: 5, //min string length
+        maxLength: 20, //max string length
+    },
+    level: {
+        type: Number,
+        default: 5, //default value
+		min: 1, //min value
+		max: 10, //max value
+    },
+    now: {
+        type: Date,
+        default: () => new Date(), //you can use a function instead of a constant.
+    },
+});
+
+Custom validation:
+
+evenNumber: {
+	type: Number,
+	validate: {
+		validator: (v) => v % 2 == 0, //return true, if the value accepts validation.
+		message: (props) =>
+			console.log(`The number ${props.value} is not even.`), Message that will be shown when validation fails.
+	},
+},
+
+Validation only works with create and save methods.
+
+
+
+
+Queries: 
+
+Queries work the same way as in mongodb.
+const user = await User.findById("62d72604bf1dffb3f94ca599");
+
+const user = await User.find({ name: "Alex" });
+
+
+There is another syntax for find.
+const users = await User.where("name").equals("Alex").where("age").lt(20);
+
+const users = await User.where("name")
+        .equals("Alex")
+        .select(["age", "name"]); //map using fields
+
+
+
+
+You can use id to refer to another object.
+Schema:
+bestFriend: {
+	type: mongoose.SchemaTypes.ObjectId,
+	ref: "Users", //collection name
+},
+
+You can get the referenced object 
+await userTom.populate("bestFriend");
+
+Now bestFriend contains object.
+
+
+
+
+
+Add methods.
+We should use functions not arrow functions there, because we use this in the functions.
+You can add method to user object.
+userSchema.methods.sayHi = function () {
+    console.log(`Hi, my name is ${this.name}`);
+};
+const userTom = await User.findOne({ name: "Tom" });
+userTom.sayHi();
+
+
+You can add static method.
+userSchema.statics.findByName = function (name) {
+    return this.findOne({ name: name });
+};
+const userTom = await User.findByName("Tom");
+userTom.sayHi();
+
+
+You can add query.
+You can't use it directly with User. You should use it on query(after find, for example).
+userSchema.query.byName = function (name) {
+    return this.where({ name: name });
+};
+const users = await User.find({}).byName("Alex");
+
+
+You can add virtual property to you object. It will not be stored in the database.
+userSchema.virtual("description").get(function () {
+    return `Name: ${this.name} Age: ${this.age}`;
+});
+
+const users = await User.find({}).byName("Alex");
+console.log(users[0].description)
+
+
