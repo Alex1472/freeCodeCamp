@@ -7,7 +7,8 @@ echo I made this boilerplate >> README.md  -  write something into file
 touch index.html - create index.html
 touch client/assets/fonts/roboto-bold.woff  -  create roboto-bold.woff in folder client/assets/fonts
 
-ls --help  -  help for ls command
+ls --help  -  help for ls 
+man ls  -  manual for ls
 ls -a (--all) - show hidden files too
 
 cp background.jpg images  -  copy backgroud.jpg to images
