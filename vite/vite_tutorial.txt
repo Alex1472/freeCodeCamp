@@ -1,0 +1,16 @@
+Vite in a build tool. It comes with a dev server and also bundles your code for production.
+
+To create start project use:
+npm init vite
+
+Run:
+npm run dev
+
+You should import image before using in react component:
+import reactLogo from './assets/react.svg'
+...
+<img src={reactLogo} className="logo react" alt="React logo" />
+It's need to teach bundler where image file it located.
+
+Also you need to add style for your root component for the same reason. This styles will be applied to element below in the tree.
+import './App.css'
