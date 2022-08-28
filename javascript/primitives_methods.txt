@@ -1,0 +1,11 @@
+PREMITIVES METHODS
+
+You can use methods for primitives.
+
+let s = "test";
+console.log(s.toUpperCase());
+
+When the methods toUpperCase is invoked, wrapping object for s is created. Then method for this objected is invoked and 
+and new string is returned. Wrapping object is deleted.
+
+Wrappers has names String, Number, BigInt, Boolean, Symbol. You can create its objects, but it is not recommended.

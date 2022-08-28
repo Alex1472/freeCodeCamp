@@ -1,0 +1,26 @@
+For number is used 64-bit format IEEE-754(double precision floating point numbers) for keeping values.
+
+You can use e for shorten record.
+let x = 3e5; //300000
+let x = 2e-4; //0.0002
+
+You can specify value in 2, 8 or 16 - based system.
+console.log(0xff); //255 - 16-based
+console.log(0b111); //7 - 2-based
+console.log(0o377); //255 - 8-based
+
+You can specify base in toString:
+(0b111).toString(2); //111
+
+isNaN(value) - converts to number and check is the value is NaN
+isFinite(value) - converts to number and check is the value isn't NaN, Infinity, -Infinity.
+Number.isNaN(), Number.isFinite() - do not convert value to number, but check the type of the value, and returns false is the value is not number.
+
+Object.is(value, value) - the same as ===, but correct works with NaN.
+console.log(Object.is(NaN, NaN)); //true
+
+parseInt, parseFloat - parse value. They try to parse number by symbol. If incorrect symbol is found they will return current number. 
+They return NaN, if they are unable to read at least one number.
+console.log(parseInt("10px")); //10
+console.log(parseInt("a10")); //NaN
+console.log(parseInt('0xff', 16)); //you can specify base of number. Usually it is recognized automatically.

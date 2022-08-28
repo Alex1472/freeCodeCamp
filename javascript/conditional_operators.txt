@@ -1,0 +1,48 @@
+LOGICAL Operators
+||, &&, !
+Priority of ! more than &&.
+Priority of && more than ||.
+
+
+|| converts values to boolean and return first true value, or the last value. It returns origin value.
+console.log(0 || null); //null
+console.log(1 || 0); //1
+console.log(null || "John" || "unnamed"); //"John"
+
+You can use || for conditional computation.
+false || console.log("test"); //"test"
+true || console.log("test"); //nothing
+
+
+
+&& - converts parameters to boolean and returns first false value or last. It returns origin value.
+console.log(null && 1); //null
+console.log(1 && 2 && 3); //3
+console.log(1 && null && 2); //null
+
+You can use it for conditions computations:
+true && console.log("test"); //"test"
+false && console.log("test"); //nothing
+
+
+
+! - converts value to boolean and return opposite value
+console.log(!null); //true
+console.log(!1); //false
+
+!! - converts value to boolean, inverts it and inverts it back. As a result it just convert value to bool (Boolean(value));
+console.log(!!null); //false
+console.log(!!1); //true
+
+
+ 
+OPERATOR ??
+It returns first value that not null and undefined or last.
+console.log(null ?? 1); //1
+console.log(3 ?? null); //3
+console.log(null ?? undefined ?? 3 ?? null); //3
+
+Priotity ?? equal priority of ||. So use () for it to avoid mistakes.
+let height = null;
+let width = null;
+let area = (height ?? 100) * (width ?? 50); //5000, priory of * more the ??. Need to use brackets.

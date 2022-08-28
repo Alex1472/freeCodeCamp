@@ -1,0 +1,28 @@
+MATH OPERATORS:
++, -, *, /, %, **
+
+
++:
+If one parameter is string it convert another parameter to string and concatinate.
+console.log(1 + "2"); //"12"
+console.log(1 + 2); //3
+
+Other arithmetic operators always convert parameter to number.
+console.log("2" * "3"); //6
+
+Unary +, convert variable to number
++"3" <=> Number("3")
+
+let apples = "2";
+let oranges = "3";
+console.log(+apples + +oranges); //5
+
+
+Bit operators:
+&, |, ^(10, 10 -> 1, 11, 00 -> 0), ~ (1 -> 0, 0 -> 1), >>, <<, >>>
+
+
+Operator , return last of evaluated expressions. As priority of , les then =, you should you (). 
+
+const res = (1 + 4, 5 + 7);
+console.log(res); //12

@@ -1,0 +1,40 @@
+PRIMITIVE TYPES CONVERTION.
+
+Operators and function usually automatically converts values to types they want.
+For example alert converts its parameter to string.
+
+You can explicitly convert to type you want.
+let value = true;
+let s = String(value); //"true"
+
+let s = "test";
+let bool = Boolean(s); //true
+
+let bool = true;
+let num = Number(bool); //1
+
+
+string:
+Explicitly convert: Number(value)
+
+Converts obvious way:
+1 -> "1"
+false -> "false"
+undefined -> "undefined"
+
+
+number:
+Explicitly convert: Number(value)
+
+string with correct number -> number
+string with incorrect number -> NaN
+null -> 0 
+underfined -> NaN
+true, false -> 1, 0
+
+
+boolean:
+Explicitly converts: Boolean(value)
+
+0, NaN, "", null, underfined -> false
+Not empty string, not zero, NaN number -> true

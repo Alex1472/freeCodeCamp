@@ -1,0 +1,21 @@
+STRICT MODE
+
+The strict mode tighten the rules for certain behaviors that usually works in javascript. In usually works because of backcompatibility. For example
+function f() {
+	i = 0;
+	console.log(i); //it create a global variable i. There is no error.
+}
+
+
+In strict mode will be an error. To activate strict mode and 'use strict' at the top of the file.
+'use strict'
+function f() {
+	i = 0;
+	console.log(i); //it create a global variable i. There is an error.
+}
+
+Also deleting variables is not allowed in strict mode.
+"use strict";
+
+let x = 0;
+delete x; //error, but it works in normal mode.

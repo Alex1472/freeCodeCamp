@@ -1,0 +1,47 @@
+DATA TYPES
+
+There is several data type in js:
+number
+BigInt
+string
+boolean
+null
+undefined - a value wasn't assigned
+object
+symbol
+
+
+typeof 
+typeof return string with a name of object.
+typeof "aa" //"string"
+typeof("aa");// the same
+
+typeof null //"object" - official error in javascript
+typeof alert //"function" - function is an object
+
+
+Variable in javascript can keep different types.
+let s = 1;
+s = "test"; //correct
+
+
+
+NUMBER:
+Interger or with floating point number.
+let n = 123;
+n = 12.345;
+
+Special values:
+Infinity, -Infinity, NaN.
+Operations with NaN return NaN.
+NaN * 2 //NaN
+Except
+NaN ** 0 //1
+
+You don't get fatal error with math operations, in worst case NaN.
+Number can't keep values geater then 2^53-1. In this case number with floating point will be used.
+
+
+BIGINT:
+You can use BigInt in this case. You should add n at the end of the number.
+const bigInt = 1234567890123456789012345678901234567890n;

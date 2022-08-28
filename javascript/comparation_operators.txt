@@ -1,0 +1,29 @@
+COMPARATION OPERATORS:
+<, <=, >, >=, ==, ===, !=, !==
+
+They return boolean.
+console.log(3 > 2); //true
+
+
+Strings is compared lexicographically. They compared with Unicode character codes.
+console.log( 'Я' > 'А' ); 
+
+If we compares string, bool or number they will be converted into number.
+console.log("2" > 1); //true
+console.log(true == "1"); //true
+
+
+=== - compares types before converting to number.
+console.log(0 === false); //false
+console.log(false === false); //true
+
+
+Compararion with null and underfined:
+With == null and undefined are equal and not equal to any other value.
+With === null and undefined are not equal.
+
+With >, >=, <, <=  null and undefined will be converted into number (0, NaN).
+console.log(null > -1); //true
+
+Note that NaN not >, < or == anything even NaN, therefore
+console.log(underined > 0); //false
