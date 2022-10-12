@@ -1,0 +1,21 @@
+There are three numberic types in python: int, float, complex:
+x1 = 1 #int
+x2 = 2.2 #float
+x3 = 1 + 3j #complex
+
+You can use e to specify a number:
+x1 = 10e4
+
+complex_number = complex(x1)
+float_number = float(x1)
+int_number = int(x2)
+
+
+Print random number:
+
+import random
+print(random.randrange(1, 10))
+
+
+import math
+print(math.floor(x))

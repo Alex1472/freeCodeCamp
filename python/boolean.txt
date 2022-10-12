@@ -1,0 +1,12 @@
+Booleans represents one of two values: True, False.
+print(10 > 9) # True
+print(1 > 2) # False
+
+Most values evaluate to True, except None, 0, '', empty collection:
+bool(False)
+bool(None)
+bool(0)
+bool("")
+bool(())
+bool([])
+bool({})

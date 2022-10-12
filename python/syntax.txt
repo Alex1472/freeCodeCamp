@@ -1,0 +1,35 @@
+Python use indentation to indicate a block of code.
+if 5 > 3:
+    print('a')
+
+The number of spacing is up to you:
+if 5 > 3:
+ print('a')
+ 
+You can't skip indentation
+if 5 > 3:
+print('a')
+#incorrect
+
+You should use the same number of spacing the same block of code:
+if 5 > 3:
+    print('a')
+  print('b')
+#incorrect
+
+
+
+Comments start with #
+print('a')
+# It's a comment
+
+
+
+Python ignores string literals that are not assigned to a variable, you can add a multiline string
+(triple quotes) and place you comment inside:
+
+"""
+Some text
+Another text
+"""
+print('a')

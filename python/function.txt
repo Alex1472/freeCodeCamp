@@ -1,0 +1,43 @@
+def print_name(fname, lname):
+    print(f'{fname} {lname}')
+
+print_name('Tom', 'Soyer')
+
+
+By default, number of parameters in a function should match number of arguments you pass.
+Positional arguments - arguments that go without argument name.
+print_name('Tom', 'Soyer') # the function has 2 positional arguments
+Keyword arguments - arguments that go with parameter names
+print_name(fname='Tom', lname='Soyer') # function has two keyword arguments
+
+POSITIONAL ARGUMENTS SHOULD GO BEFORE KEYWORD ARGUMENTS
+print_name(1, 2, fname='Tom', lname='Soyer') #correct
+print_name(1, fname='Tom', 2, lname='Soyer') #incorrect
+
+
+You should always pass all paraments a function define.
+print_name('Tom', 'Soyer') #correct
+print_name('Tom', lname='Soyer') #correct
+print_name(fname='Tom', lname='Soyer') #correct
+print_name('Tom') #incorrect
+
+You can also pass additional positional arguments. In this case you should add *args in function declaration.
+It is a tuple of arguments
+def print_name(fname, lname, *args)
+print_name('Tom', 'Soyer', 15, 1900) #args = (15, 1900), args - tuple
+
+You can also pass additional keyword arguments. In this case you should add **kwargs in function declaration.
+It is a dictionary.
+def print_name(fname, lname, **kwargs)
+print_name('Tom', 'Soyer', age=15, year=1900) # kwargs = { age: 15, year: 1900 }
+
+You can also pass additional positional and keyword paramenters. In this case positional paramenters 
+should go before keyword.
+def print_name(fname, lname, *args, **kwargs)
+print_name('Tom', 'Soyer', 'test', age=15, year=1900) # args=('test',) kwargs={ age: 15, year: 1900 }
+*ARGS SHOULD GOES BEFORE *KWARGS'
+
+You can also use default paramenters.
+def print_name(fname = 'Tom', lname = 'Soyer'):
+
+

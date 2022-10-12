@@ -1,0 +1,39 @@
+By default, python don't support abstract classes. If you create class without implementation or method without implementation(via the pass word)
+you can create this class.
+
+But you can use this functionality with the module abc
+
+from abc import ABC, abstractmethod # ABC - abstract base class
+
+class Employee(ABC): # inheritance from ABC 
+    def __init__(self, fname, lname):
+        self.fname = fname
+        self.lname = lname
+    
+    def full_name(self):
+        return f'{self.fname} {self.lname}'
+    
+    @abstractmethod # abstract method
+    def get_salary(self):
+        pass
+
+class FullTimeEmployee(Employee):
+    def __init__(self, fname, lname, salary):
+        super().__init__(fname, lname)
+        self.salary = salary
+    
+
+employee = Employee('Alex', 'Jhonson') # error, you can't create abstract class
+ftemployee = FullTimeEmployee('Tom', 'Hanks', 5000) # error, you should create an implementation of the get_salary method.
+
+
+class FullTimeEmployee(Employee):
+    def __init__(self, fname, lname, salary):
+        super().__init__(fname, lname)
+        self.salary = salary
+    
+    def get_salary(self):
+        return self.salary
+		
+#now you can create an instance of FullTimeEmployee 
+ftemployee = FullTimeEmployee('Tom', 'Hanks', 5000) 
