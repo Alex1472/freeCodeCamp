@@ -153,13 +153,33 @@ class Person:
     def sayHello(self):
         print(f'Hi! My name is {self.name}')
 
-
 person = Person('Tom')
 person.sayHello()
 person.__dict__['sayHello'] = 1 # create attribute in instance dict. Python will not look in class __dict__
 print(person.sayHello) # 1
 print(person.__dict__) {'name': 'Tom', 'sayHello': 1}
 
+
+
+# __GETATTR__, __SETATTR__, __DELATTR__ MAGIC METHODS
+# __getattr__ is invoked when you try to get not existing attribute
+# __setattr__, __delattr__ is invoked always
+# Note, when you try to get attribute with __dict__ these methods aren't invoked.
+class Person:
+    def __getattr__(self, name):
+        print('get', name)
+
+    def __setattr__(self, name, value):
+        print('set', name, value)
+        super().__setattr__(name, value) # we should set the base method otherwise the attribute won't be set
+
+person = Person()
+person.name = 'Tom' # set name Tom
+print(person.name) # __getattr__ isn't invoked as attribute existes
+print(person.age) # __getattr__ is invoked get age
+
+#Note, if there is class attribute __getattr__ method isn't invoked.
+  
 
 
 You can define CLASS METHOD. It will be shared by all instances of the class. You should use decorator @classmethod for this. You 

@@ -1,0 +1,15 @@
+# Module just a python file:
+# First string in this file usually is a doc
+
+"""It's m1 module!"""
+
+
+def f1():
+    print('From f1')
+
+
+def f2():
+    print('From f2')
+
+
+a = 1
