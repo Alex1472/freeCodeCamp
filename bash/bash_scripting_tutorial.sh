@@ -108,7 +108,7 @@ ls; echo $?
 
 CONDITIONS:
 For manual use:
-he lp [[
+help [[
 help test
 
 [[  EXPRESSION ]]  - return 0 or 1, depending on the evaluation of the conditional expression EXPRSSION.
