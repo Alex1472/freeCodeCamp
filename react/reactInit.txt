@@ -1,0 +1,363 @@
+To set up react in simple project you should add react, reactDOM and babel library.
+And add root element in which react part will be reandered.
+And type="text/babel" for your script with JSX-code.
+
+index.html:
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="index.css" />
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        /></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>        
+        <script src="index.js" type="text/babel"></script>
+    </body>
+</html>
+
+Use ReactDOM.render to render some JSX-elenent into a root element.
+index.js
+ReactDOM.render(<h1>Hello, everyone</h1>, document.getElementById("root"));
+
+In React 18 you should create root and render with it instead.
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <h1>Hello, everyone</h1>
+);
+
+
+
+JSX - JavaScript XML
+JSX is like a function that returns an object that react can interpret and create actual elements.
+
+const element = <h1 className="header">This is JSX</h1>  -  its just an object.
+console.log(element)
+
+/*
+{
+    type: "h1", 
+    key: null, 
+    ref: null, 
+    props: {
+        className: "header", 
+        children: "This is JSX"
+    }, 
+    _owner: null, 
+    _store: {}
+}
+ */
+
+
+ 
+<div>
+	{props.setup && <h3>{props.setup}</h3>}
+</div>
+
+
+
+You can use just curly braces for javascript values in tag content.
+<span className="bold">From ${props.price}</span> //From $15
+
+
+
+
+
+You can put an array into jsx. Its kind of putting array element instead of array.
+const colors = [
+		<h3>Red</h3>, 
+		<h3>Orange</h3>, 
+		<h3>Yellow</h3>,
+		<h3>Green</h3>,
+		<h3>Blue</h3>,
+		<h3>Indigo</h3>,
+		<h3>Violet</h3>
+	]
+return (
+	<div>
+		{colors}
+	</div>
+)
+
+same as
+
+return (
+	<div>
+		<h3>Red</h3>, 
+		<h3>Orange</h3>, 
+		<h3>Yellow</h3>,
+		<h3>Green</h3>,
+		<h3>Blue</h3>,
+		<h3>Indigo</h3>,
+		<h3>Violet</h3>
+	</div>
+)
+
+
+
+
+Spread operator, you can pass all item properties into Card like this.
+<Card
+	key={item.id}
+	{...item}	
+/>
+
+
+
+
+React updates user interface in responce for update of component state.
+
+You mustn't change you incoming props:
+function Navbar(props) {
+    props.coverImage = "something else"
+}
+
+
+
+
+if you want set new value, the best practice is to use callback function with oldValue. Not just use old state.
+const [count, setCount] = React.useState(0)
+function add() {
+	setCount(function(oldValue) {
+		return oldValue + 1
+	})
+}
+
+
+You can set css properties in React.
+
+const styles = {
+	backgroundColor: "#222222"
+}
+const squareElements = squares.map(square => (
+	<div style={styles} className="box" key={square.id}></div>
+))
+
+const squareElements = squares.map(square => (
+	<div style={{backgroundColor: "#222222"} className="box" key={square.id}></div>
+))
+
+
+
+
+You can put id to event handler to Box in collection of items like this:
+function toggle(id) {
+	setSquares(prevSquares => {
+		return prevSquares.map(square => {
+			return square.id === id ? { ...square, on: !square.on } : square
+		})
+	})
+}
+
+<Box 
+	key={square.id} 
+	on={square.on} 
+	toggle={() => toggle(square.id)}
+/>
+
+
+
+Forms: 
+the element state should be the source of truth therefore you should update state on every change in element and take value for element from state.
+export default function Form() {
+    const [firstName, setFirstName] = React.useState("")
+    
+    function handleChange(event) {
+        setFirstName(event.target.value)
+    }
+    
+    return (
+        <form>
+            <input
+                type="text"
+                placeholder="First Name"
+                onChange={handleChange}
+				value={firstName}
+            />
+        </form>
+    )
+}
+
+
+
+You can handle form inputs in more general way. State field and input name should be the same. On handleChange with event you can set property 
+with [event.target.name]: event.target.value.
+The [] is the future of ES6 called computation properties.
+
+export default function Form() {
+    const [formData, setFormData] = React.useState(
+        {firstName: "", lastName: ""}
+    )
+    
+    function handleChange(event) {
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [event.target.name]: event.target.value
+            }
+        })
+    }
+    
+    return (
+        <form>
+            <input
+                type="text"
+                placeholder="First Name"
+                onChange={handleChange}
+                name="firstName"
+            />
+            <input
+                type="text"
+                placeholder="Last Name"
+                onChange={handleChange}
+                name="lastName"
+            />
+        </form>
+    )
+}
+
+
+Checkbox has property checked instead of value. You can handle it like this:
+
+<input 
+	type="checkbox" 
+	id="isFriendly" 
+	checked={formData.isFriendly}
+	onChange={handleChange}
+	name="isFriendly"
+/>
+<label htmlFor="isFriendly">Are you friendly?</label> //htmlFor is react analogue of for in html
+
+You can modify handleChange function like this to utilize it with checkboxes.
+function handleChange(event) {
+	const {name, value, type, checked} = event.target
+	setFormData(prevFormData => {
+		return {
+			...prevFormData,
+			[name]: type === "checkbox" ? checked : value
+		}
+	})
+}
+
+
+In react you should set value in select tag to select some an option instead of set selected attribute in corresponding option in html.
+<select 
+	id="favColor"
+	value={formData.favColor}
+	onChange={handleChange}
+	name="favColor"
+>
+	<option value="">-- Choose --</option>
+	<option value="red">Red</option>
+	<option value="orange">Orange</option>
+	<option value="yellow">Yellow</option>
+	<option value="green">Green</option>
+	<option value="blue">Blue</option>
+	<option value="indigo">Indigo</option>
+	<option value="violet">Violet</option>
+</select>
+
+
+
+
+In html 5 if button in form it default type is submit. You should handle onSubmit event to make call to api. Invoke event.preventDefault() to 
+the page will not be updated.
+
+function handleSubmit(event) {
+	event.preventDefault();
+	doApiCall(state);
+}
+<form onSubmit={handleSubmit}>
+	
+	<button>Send</button>
+</form>
+
+
+
+
+You can't do fetch request in component because will be an infinite loop of render - fetch - get data - setState - rerender
+export default function App() {
+    const [starWarsData, setStarWarsData] = React.useState({})
+    
+    fetch("https://swapi.dev/api/people/1")
+        .then(res => res.json())
+        .then(data => setStarWarsData(data))
+        
+    return (
+        <div>
+            <pre>{JSON.stringify(starWarsData, null, 2)}</pre>
+        </div>
+    )
+}
+
+useEffect function runs after every render (when dom was rendered on a screen). By default it runs after every render.
+
+
+You can specify dependency array as a second parameter. In this case effect will be ran only in the dependency array has changed from previous render.
+const [count, setCount] = React.useState(0)
+
+React.useEffect(() => {
+	console.log("Effect function ran")
+}, [count])
+
+
+You can return a function from the effect function. This function will be invoked when before render and before effect function and also after 
+component will be unmount.
+
+React.useEffect(() => {
+	function watchWidth() {
+		console.log("Setting up...")
+		setWindowWidth(window.innerWidth)
+	}
+	
+	window.addEventListener("resize", watchWidth)
+	
+	return function() {
+		console.log("Cleaning up...")
+		window.removeEventListener("resize", watchWidth)
+	}
+}, [])
+
+
+
+
+Note, you can't use async in effect function because it should return clean-up function but not promise.
+But there is a workaround, you can create another async function in effect function.
+
+React.useEffect(() => {
+	async function getMemes() {
+		const res = await fetch("https://api.imgflip.com/get_memes")
+		const data = await res.json()
+		setAllMemes(data.data.memes)
+	}
+	getMemes()
+	
+	return () => {
+		
+	}
+}, [])
+
+
+
+
+
+Expression in useState runs on every render. React save the value on first render expression returns. Values that will be return on next render will be ignored.
+const [notes, setNotes] = React.useState(
+	JSON.parse(localStorage.getItem("notes")) || []
+) //getItem will be invoked on every render
+
+You can fix in with lazy initialization. Just pass into useState function that returns initial value. 
+const [notes, setNotes] = React.useState(
+	() => JSON.parse(localStorage.getItem("notes")) || []
+) //lambda will be invoked only on first render.
+
