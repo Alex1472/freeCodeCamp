@@ -1,0 +1,127 @@
+Function is an object.
+You can get function name with property name, arguments count with property length.
+
+function say(s) {
+    console.log(s);
+}
+
+console.log(say.length);
+console.log(say.name);
+
+
+
+REST PARAMENTERS
+Function can receive arbitrary number of parameters. You can keep rest paramenter in a special array.
+function sum(a, b, ...rest) {
+	let res = a + b;
+	for(let x of rest)
+		res += x;
+	return res;
+}
+
+let result = sum(3, 5, 1, 3); //a = 3, b = 5, rest = [1, 3]
+
+
+
+FUNCTION ARGUMENTS
+There is a pseudo array with all arguments of function. Arguments isn't supported by arrow functions. In this case
+you will get arguments of parent function.
+function sum(a, b, ...rest) {
+	let res = 0;
+	for(let x of arguments)
+		res += x;
+	return res;
+}
+
+console.log(sum(1, 2, 3, 4)) //arguments = [1, 2, 3, 4]
+
+
+
+EXTESTION OPERATOR(...)
+You can unwrap iterable object with operator ... .
+
+let arr = [1, 2, 3, 4];
+let res = max(...arr); //max receive seperate numbers
+
+let arr1 = [1, 2];
+let arr2 = [3, 4];
+let res = [...arr1, 4, ...arr2]; //[1, 2, 4, 3, 4]
+
+
+function max(...args) {
+    let res = 0;
+    for (let x of args) if (x > res) res = x;
+    return res;
+}
+let data = [1, 2, 3, 4];
+console.log(max(...data)); //extention operator
+
+You can create array from iterable object 2 ways:
+1) [...data] //receives iterable object
+2) Array.from(data) //receives iterable object or pseudo array
+
+
+
+NEW FUNCTION
+You can create function in runtime from string. As a parent lexical environment the created function will be use the global object.
+let sum = new Function("a", "b", "return a + b");
+console.log(sum(3, 6));
+
+
+
+F.CALL, F.APPLY
+You can call a function with explicitly setting this. You  should use method call, and pass into it this object and parameters.
+function f(x) {
+    console.log(this); // { a: 1 }
+	console.log(x); // 6
+}
+
+f.call({ a: 1 }, 6);
+
+Instead of call, you can use apply method. It recieves pseudo-array of arguments, instead of list of arguments in call.
+function showName(a, b) {
+    console.log(`${a} ${this.name} ${b}`);
+}
+let user1 = { name: "Alex" };
+showName.call(user1, "test1", "test2");
+showName.apply(user1, ["test1", "test2"]);
+
+
+
+USE METHOD OF ANOTHER OBJECT.
+You can use method of another object like this.
+
+function hash(a, b) {
+    //return [a, b].join();
+    return [].join.call(arguments);
+}
+console.log(hash("a", "b"));
+
+It works because of join only use length and index in its implementation. And arguments is pseudo-array.
+
+
+
+F.BIND
+You can fix in a method or function with f.bind. It return wrapper under the function.
+let person = {
+    name: "Alex",
+    sayHi(phrase) {
+        console.log(`${phrase} ${this.name}`);
+    },
+};
+let sayHi = person.sayHi;
+//sayHi() - name - undefined
+sayHi = sayHi.bind(person); //fix this, 
+sayHi("Hello");
+
+
+You can also fix several first argument of function with bind:
+function multiply(a, b) {
+    return a * b;
+}
+
+let double = multiply.bind(null, 2);
+console.log(double(5));
+
+
+

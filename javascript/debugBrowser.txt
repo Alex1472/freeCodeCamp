@@ -1,0 +1,10 @@
+Sources - main tab in developer tools
+
+You can open console there with Esc button.
+You can set conditional breakpoint. Should click right button on row and set it.
+You can write debugger in code to set breakpoint.
+F8 - resume
+F11 - step into
+F11 + Shift - step out
+On debug panel you can active/deactivate all breakpoint. Also you can enable / disable pause when exception occurs.
+You can click on line and click continue to here to go to this line.
