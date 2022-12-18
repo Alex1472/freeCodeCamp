@@ -36,7 +36,7 @@ from m1 import f1
 f1()
 
 
-# You can give alie to module
+# You can give alies to module
 # The __name__ of the module will not change. 
 import m1 as m
 
@@ -255,7 +255,22 @@ print(f'Useful.bar: {"useful.bar" in sys.modules}') # Useful.bar: True
 # Note if you load module, and than have changed it, sys.modules won't be updated with next import.
 # Old version of the module will be get.
 
+# You can get local / global namespaces (dictionaries) with the locals() / globals() functions. 
 
+
+
+# RELOAD
+# You can force to reload a module with the importlib.reload function.
+import importlib
+import useful.foo # load module
+
+importlib.reload(useful.foo) # reload module
+
+
+
+# PYPI, PIP
+# There are a lot if community developed packages on PYTHON PACKAGE INDEX (PyPI).
+# You can install packages with pip package manager.
 
 # RUN MODULES
 # useful

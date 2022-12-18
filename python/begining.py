@@ -93,5 +93,3 @@ print(list(range(5, -1, -1))) # [5, 4, 3, 2, 1, 0] step can be negative
 # Use list to to get values from it.
 print(type(reversed([1, 2, 3]))) # <class 'list_reverseiterator'>
 print(list(reversed([1, 2, 3]))) # [3, 2, 1]
-
-

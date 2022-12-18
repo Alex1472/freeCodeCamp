@@ -1,6 +1,6 @@
 # EXCEPTIONS:
 # CATCHING EXCEPTIONS
-# You can handle exceptions with type - except block
+# You can handle exceptions with try - except block
 # It will be invoked the isinstance function for exception(isinstance(e, TypeError))
 try:
     x = [1, 2] + 1

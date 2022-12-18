@@ -1,8 +1,0 @@
-You can add else statement to run code once after while loop.
-
-x = 1
-while x < 5:
-    print(x)
-    x += 1
-else:
-    print('end')

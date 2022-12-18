@@ -56,6 +56,8 @@ git branch
 git branch new_branch_name
 # Delete branch
 git branch -d branch_to_delete
+# Rename branch 
+git branch -m old_branch_name new_branch_name
 
 
 # You can use intereactive mode for rebase
