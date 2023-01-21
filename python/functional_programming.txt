@@ -1,1 +1,0 @@
-# In python there is lambda functions.
