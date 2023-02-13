@@ -33,6 +33,8 @@ def logger(fn):
     def wrapper(*args, **kwargs):
         print(fn.__name__)
         return fn(*args, **kwargs)
+    # Or use the function update_wrapper
+    # functools.update_wrapper(wrapper, fn)
     return wrapper
 
 print(wrapper.__name__) # say_hello
