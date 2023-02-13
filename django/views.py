@@ -393,3 +393,20 @@ urlpatterns = [
     </body>
 </html>
 
+
+
+# REDIRECT WITH PARAMETERES
+# You can add path parameters for redirect with args
+path('forum/<int:pk>', ForumDetailView.as_view(), name='forum_detail')
+# view:
+return redirect(reverse('forums:forum_detail', args=[pk])) # specify list of parameters (primary key in this case)
+
+
+
+# SPECIFY SUCCESS URL
+# If you need to calculate success url by current object, you can override the get_success_url method in the view
+class DeleteCommentView(DeleteView):
+
+    def get_success_url(self):
+        forum = self.object.forum
+        return reverse('forums:forum_detail', args=[forum.pk])

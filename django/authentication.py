@@ -29,7 +29,7 @@ reverse('logout')
 # USER CONTEXT OBJECT
 # If you are logged in, in the context of any page you have a user object
 # main.html
-{% if user %} 
+{% if user.is_authenticated %} 
 {{ user.email }} 
 {% endif %}
 

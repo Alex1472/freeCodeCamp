@@ -95,3 +95,10 @@ from django.contrib import admin
 from .models import Question # model for table to edit
 
 admin.site.register(Question)
+
+
+
+# HANDLING IMAGES
+# To store images you should create two fields: form image data and content_type
+picture = models.BinaryField(null=True, blank=True, editable=True)
+content_type = models.CharField(max_length=255, null=True, blank=True)

@@ -95,3 +95,5 @@ class AwesomeView(View):
         msg = checkguess(guess)
         reqeust.session['msg'] = msg
         return redirect(request.path)
+        
+        

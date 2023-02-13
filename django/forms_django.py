@@ -248,3 +248,41 @@ class CatDelete(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('cats:all')
     # you can specify you template with template_name field
     # template_name = 'cats/my_template.html'
+
+
+# HANDLING FILES
+# When you create a form with files from client, you should pass files from request
+form = CreateForm(request.POST, request.FILES or None)
+    
+    
+# DATA VALIDATION
+# You can validate data from server, in the lifecycle method clean
+# It will be ranned when form is creating
+# You can add an error
+# The error occur while invoking is_valid method
+def clean(self):
+    data = super().clean() # data that was send from client, dictionary
+    pic = data.get('picture')
+    if pic is None:
+        return data
+    if len(pic) > self.max_upload_limit: # add error
+        self.add_error('picture', 'File must be < ' +
+                       self.max_upload_limit_text + ' MB')
+    return data
+
+
+
+# DATA SAVING
+# You can override the save method to change model item before saving
+def save(self, commit=True):
+    instance = super(CreateForm, self).save(commit=False) # get model item
+    pic = instance.picture
+    
+    # Add image information before saving
+    if isinstance(pic, InMemoryUploadedFile):
+        bytearr = pic.read()
+        instance.picture = bytearr
+        instance.content_type = pic.content_type
+    if commit:
+        instance.save()
+    return instance

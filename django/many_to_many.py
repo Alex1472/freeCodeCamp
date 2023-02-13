@@ -6,7 +6,9 @@ class Book(models.Model):
         validators.MinLengthValidator(
             2, 'Name should has at least 2 characters.')
     ])
-    authors = models.ManyToManyField('Author', through='Authored') # virtual many-to-many field
+    # authros - virtual many-to-many field, that contains all authors for the book
+    # related_name specifies virtual field 'on the other end' (Author) that contains all book for this author
+    authors = models.ManyToManyField('Author', through='Authored', related_name='books') # virtual many-to-many field
 
 
 class Author(models.Model):
@@ -48,3 +50,5 @@ book1.authors.values()
 <QuerySet [{'id': 1, 'name': 'author1'}]>
 book2.authors.values()
 <QuerySet [{'id': 2, 'name': 'author2'}, {'id': 3, 'name': 'author3'}]
+
+author1.books.values() # with realted_name
