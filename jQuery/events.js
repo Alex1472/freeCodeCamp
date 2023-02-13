@@ -1,5 +1,5 @@
-jQuery add handler for different events:
-click, dblclick, mousenter, mouseleave, mousedown, mouseup, hover
+// jQuery add handler for different events:
+// click, dblclick, mousenter, mouseleave, mousedown, mouseup, hover
 
 $(function() {
     $("p").click(function() {
@@ -13,7 +13,7 @@ $(function() {
     });
 });
 
-hover = mouseenter + mouseleave. It takes to functions.
+// hover = mouseenter + mouseleave. It takes two functions.
 $(function() {
     $("p").hover(function() {
         console.log("mouse enter");
@@ -25,7 +25,7 @@ $(function() {
 
 
 
-Input events: focus, blur(focus leave), change(input text was changed and enter was clicked)
+// Input events: focus, blur(focus leave), change(input text was changed and enter was clicked)
 $(function() {
     $("input").focus(function() {
         console.log("focus");
@@ -39,14 +39,14 @@ $(function() {
 });
 
 
-
-You can subscribe on an event with on method.
+// ON
+// You can subscribe on an event with on method.
 $(function() {
    $("p").on("click", function() {
        console.log("click");
    });
 });
-You can subscrive for several events using dictionary.
+// You can subscrive for several events using dictionary.
 $(function() {
     $("p").on({
         "click": function() { console.log("click"); },
@@ -55,13 +55,15 @@ $(function() {
     });
 });
 
-You can unsubscribe with off method.
+// OFF
+//You can unsubscribe with off method.
 $(function() {
     $("p").on("click", function() { console.log("click"); });
     $("button").on("click", function() { $("p").off("click"); });
 });
 
-You can subscribe, so that an event works just one time with one method.
+// ONE
+// You can subscribe, so that an event works just one time with one method.
 $(function() {
     $("p").one("click", function() { console.log("click"); });
 });

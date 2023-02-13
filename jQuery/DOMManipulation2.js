@@ -1,5 +1,5 @@
-append, prepend methods and elements as last and first child of the selected element.
-before, after add element as before and after the selected element.
+// append, prepend methods and elements as last and first child of the selected element.
+// before, after add element as before and after the selected element.
 
 <div class="container">
 	<p>Some text</p>
@@ -17,7 +17,7 @@ $(function() {
     });
 });
 
-You can use chane rule:
+// You can use chane rule:
 $(function() {
     $("#btn").click(function() {
         $(".item")
@@ -28,11 +28,11 @@ $(function() {
     });
 });
 
-Remove selected elements with remove method:
+// Remove selected elements with remove method:
 $(".item").remove();
 
-You can remove only the elements that have a particular class:
+// You can remove only the elements that have a particular class:
 $("p").remove(".filter"); //removes only p with filter class
 
-Remove all children with empty method.
+// Remove all children with empty method.
 $(".container").empty();
