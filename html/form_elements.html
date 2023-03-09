@@ -1,0 +1,58 @@
+<!-- TEXT -->
+<!-- You should specify name and value attribute (for default input value). The pair of name and value(entered by user) will be sent on server. -->
+<input type="text" name="myText" value="default text" />
+
+
+<!-- CHECKBOXES -->
+<!-- You should set attributes name and value. If checkbox is checked, this pair will be send on submit on server(and only in this case). -->
+<input type="checkbox" name="myCheckbox" value="checkboxValue" />
+
+
+<!-- RADIOS -->
+<!-- You should set attributes name and value. If radio is checked, this pair will be send on submit on server(and only in this case). -->
+<input type="radio" name="myRadio" value="radio1">
+
+<!-- If you want that among several radio only one can be checked at any moment, you should set same names for this radio. In this case the value of -->
+<!-- checked radio will be send on server with this name. -->
+<input type="radio" name="myRadio" value="radio1" checked />
+<input type="radio" name="myRadio" value="radio2" />
+<!-- Result: { myRadio: "radio1" } -->
+
+
+<!-- TEXTAREA -->
+<!-- You should set attribute name. Value you can define between opening and closing tags. This pair name, value will be sent on server. -->
+<textarea name="myTextArea">Some text</textarea>
+
+
+<!-- SELECT -->
+<!-- You should specify name attribute in select and values in option. Then pair name and selected option value will be sent on server. -->
+<!-- You can set selected attribute to select option by default. -->
+<select name="mySelect">
+	<option value="option1">Option 1</option>
+	<option value="option2" selected>Option 2</option>
+	<option value="option3">Option 3</option>
+</select>
+<!-- Result: { mySelect: "option2" } -->
+<!-- You can specify multiple attribute in select so that user can select multiple value. -->
+<!-- In this case in name, value pair value will be an array of option values. -->
+
+
+<!-- FIELDSET -->
+<!-- You can group several html elements with fieldset. It isn't influence how data will be sent on server. -->
+<!-- It has attribute form that can take fieldset part of the form even if it isn't nested inside it. -->
+<fieldset>
+	<input
+		type="checkbox"
+		name="checkbox1"
+		value="checkboxValue1"
+		checked
+	/>
+	<input
+		type="checkbox"
+		name="checkbo2"
+		value="checkboxValue2"
+		checked
+	/>
+	<input type="radio" name="radio1" value="radio1" />
+	<input type="radio" name="radio1" value="radio2" />
+</fieldset>
