@@ -1,0 +1,507 @@
+/* TAGS */
+/* ASIDE tag is used to represent data aside of a page. */
+
+<em></em> /* italic */
+<strong></strong> /* bold */
+<i></i> /* for italic text and or for icons */
+
+/* You can group your selectors, for example typography, layout, ... . It's better that in group selector go from more general */
+/* to less general. h1, h2, p, .title, .article-title, .article-subtitle . */
+
+/* Open the reference in a new tab */
+<a target="_blank" ></a> 
+
+/* You can use figure to display image with caption (use figcaption for this) */
+<figure>
+	<img>
+	<figcaption>Header</figcaption>
+</figure>
+
+/* You can use legend to add caption for fieldset */
+<fieldset>
+	<legend>Legend is a header for fieldset</legend>
+	<input type="text">
+</fieldset>
+
+/* Blur element with radius 2px */
+.item {
+	filter: blur(2px);
+}
+
+/* href for an element on the page. Use id of the element */
+<li><a href="#student-info">INFO</a></li>
+
+/* For smooth scroll to the a element specify scroll-behavior */
+.item {
+	scroll-behavior: smooth;
+}
+
+/* You can calculate sizes (even with different units) with the calc function */
+.example {
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+
+/* LEGEND */
+/* You can add caption to the table with caption tag. It should goes first in the table. */
+<table>
+	<caption>Assets</caption>
+	<thead></thead>
+    <tbody></tbody>
+</table>
+
+/* Table structure */
+<table>
+	<thead>
+	  <tr>
+		<td></td>
+		<th>
+		  <span>2019</span>
+		</th>
+		<th>
+		  <span>2020</span>
+		</th>
+		<th>
+		  <span>2021</span>
+		</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr>
+		<th></th> /* you can use th in tr, not only in the thead */
+		<td>$25</td>
+		<td>$30</td>
+	  </tr>
+	  <tr></tr>
+	</tbody>
+</table>
+
+/* Show one border in a table, instead of for every cell */
+table {
+	border-collapse: collapse;
+}
+
+/* Some old browser do not support some modern css properties */
+/* They have their own properties with profixes */
+/* For example: */
+/* Modern property */
+animation: size-down ease-out 0.5s infinite alternate both;
+/* Prefix property */
+-webkit-animation: size-down ease-out 0.5s infinite alternate both;
+
+
+
+/* LAYOUT */
+/* BLOCK, INLINE AND INLINE-BLOCK
+Block:
+Stack on top of each other.
+div, h1, p - samples
+Can set height, width, margins. */
+
+/* Inline:
+Set side by side.
+span, a - samples
+Can't set height, width, margins. */
+
+/* Inline-block:
+Set side by side.
+button, input - samples
+Can set height, width, margins. */
+
+
+/* When an element touches its parent, its top and bottom margins will merge with the margins of the 
+parent elements. (add value of element margin to top / bottom margin of parent element).
+You can fix it by adding non-zero up/down parent padding.
+This is not a problem with grid and flexbox. */
+<header> /* header has some margin in the top and h1 do not has margins at the top */
+	<h1>some text</h1>
+</header>
+
+header {
+	padding: 5px 0px;
+}
+
+/* We usually use padding in container. First element has zero top margin. And last element has zero bottom margin. */
+
+/* It's better use only margin bottom (not top and bottom), it's more easy to understand. */
+
+/* You can set min-width and max-width to limit width of element. */
+/* It can't be smaller them 500px and more then 620px. */
+.elem {
+	width: 90%;
+	max-width: 620px;
+	min-width: 500px;
+}
+
+/* You can specify width as fit-content for block element to set width by content, without display: inline-block */
+.elem {
+	width: fit-content;
+}
+
+/* margin: auto only works when width was set and display: block */
+
+/* Percent height do no work, if it calculated by content. You should set height explicitly: */
+.toggler {
+    height: 50%; 
+}  /* do not work */
+/* It works with position: absolute */
+.parent {
+    position: relative;
+}
+.toggler {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50%;
+}
+/* Or if you set parent height explicitly: */
+.parent {
+    height: 500px;
+}
+.toggler {
+    height: 50%;
+}
+
+/* box-shadow */
+.item {
+	box-shadow: 5px 5px red; /* shadow 5px right, 5px down */
+	box-shadow: 5px 5px 5px green; /* third parameter is a blur radius */
+	box-shadow: 5px 5px 5px 3px green; /* 3px spread radius, increase shadow on 3px vertically and horizontally. Negative value decrease shadow. */
+}
+
+/* You can specify margin in a format top left/right bottom */
+.item {
+	margin: 10px 20px 15px;
+}
+
+/* Set aspect-ratin for elements. So you can set width and aspect-ratio and height will be defined. */
+.item {
+	width: 200px;
+	aspect-ratio: 3/2;
+}
+
+/* You can specify border-radius using percent */
+.item {
+	border-radius: 50%;	
+}
+
+/* overflow: hidden - hide overflow content (round image) */
+
+/* FLEXBOX */
+/* space-evenly - equal space between columns(rows) and before first and last column.
+   align-items: stretch; (default value), stretch items this vertical to the size of the most biggest one. */
+.elem {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: stretch;
+}
+
+/* By default flexbox doesn't create new line / column if items do not fit on it */
+/* It shrinks this item */
+/* To create new line / column specify flex-wrap */
+.item {
+	flex-wrap: wrap / no-wrap
+}
+
+/* You can specify gap between rows / columns */
+.item {
+	gap: 16px; /* offset between rows / columns - there is a gap between rows, that not contains in rows / columns */
+	row-gap / column-gap: 16px;
+}
+
+
+
+/* SELECTORS */
+/* :active sudo-selector is applied when user mouse down on link but not up. */
+a:active {
+	color: red;
+}
+/* :focus - another sudo-selector. It is applied when you navigate with the tab key. */
+a:focus {
+	text-decoration: underline;
+}
+
+/* SELECTORS SPECIFICITY */
+/* We want to know which rull will be applied to element that selected several ways.
+We can think, that
+	1) Element has 1 point
+	2) Class has 10 points
+	3) Id has 100 points
+Selector with the largest number of point will win.
+So id has more spicificity that class.
+ 
+Compound selector has spicificity equals to sum of points of it parts.
+.links-container a - 11 points */
+
+
+
+/* CSS UNITS */
+/* Absolute: px, pt(4/3 px), cm, mm, in, ...
+% - relative to parent property
+em, rem - relative to font size
+vw, vh, vmin(min(vw, vh)), vmax(max(vw, vh)) */
+
+
+
+/* IMAGE */
+/* Image by default has its own size. 
+If you set width or height of it the other dimentions will scale proportionally.
+If you set width and height the image will be stretched. */
+
+/* If image is inline(by default), it has small margin below. */
+img {
+	max-width: 100%;
+	display: block;
+}
+
+/* You can use OBJECT-FIT property to define how image will be desplayed when width and height were set. */
+
+/* BACKGROUND IMAGE */
+background-image: url(images/cat.jpg);
+.item {
+	background-position: 100px 100px; /* shift top left corner of the image on 100px right and bottom */
+	background-position: left top; /* left top image corner should be in the left top corner of the container */
+	background-position: right bottom; /* right bottom image corner should be in the right bottom corner of the container */
+	background-position: center center; /* center of the image should be in the center of the container. */
+}
+.item {
+	background-size: 200px 100px; /* background image with width 200px and height 100px */
+	background-size: contain; /* background image should contains in container */
+	background-size: cover; /* background-image should be croped to fit container */
+}
+.item {
+	background-repeat: no-repeat; /* no repeat image */
+	background-repeat: repeat-x; /* repeat only along axis x */
+	background-repeat: repeat-y; /* repeat only along axis y */
+}
+/* With background-image it is highly recomended to use background-color in case the image won't be loaded. */
+
+/* COLORS: */
+/* RGB: */
+p { 
+  color: rgb(255, 0, 0); 
+}
+/* RGBA: */
+p { 
+  color: rgba(255, 0, 0, 128); 
+}
+/* HSL: */
+hue: 0 - 360 degree
+saturation: 0% - 100%
+lightness: 0% - 100%
+p { 
+  color: hsl(0, 100%, 50%);
+}
+/* HEX: */
+rgb(255,0,0) == #FF0000
+
+/* GRADIENTS: */
+/* We use background-image for gradients: */
+.item {
+	background-image: linear-gradient(to top, red, blue);
+	background-image: linear-gradient(to top left, red, blue);
+}
+/* You can use degAngle to set direction: */
+.item {
+	background-image: linear-gradient(45deg, red, blue);
+}
+/* You can define where a color should start: */
+.item {
+	background-image: linear-gradient(to right, red, yellow 50%, blue);
+}
+/* Also you can use radial gradient: */
+.item {
+    background-image: radial-gradient(red, blue);
+}
+/* You can use gradiens in borders: */
+.item {
+	border-image: linear-gradient(to left, #ff713b, #ffa51d) 1; /* 1 should be to it works */
+}
+/* You can blend background-color and background-image with background blend mode: */
+.item {
+	background-image: url(images/ribs.jpg);
+	background-color: #404040;
+	background-blend-mode: multiply;
+}
+
+
+
+/* FONTS */
+/* Font size in inherited property, therefore if you don't declare it in element the value will be inhereted from parent element.
+	rem calculate its size according to font-size of html element(by default 16px)
+	px - (1px = 1/96th of 1in) - pixel is not just 1px on screen, it has fixed size.
+	em - size according to the current font size. If we set font-size it looks on parent font size. With any other properties look on	
+	current font size.
+*/
+/* It's better specify sizes in:
+	font - rem
+	padding, margin - em
+	width - em, percentage
+*/
+
+/* You can define style for text-decoration: */
+.elem {
+    text-decoration: undeline dotted
+}
+.elem { 
+  text-decoration: underline red solid 5px;
+}
+.elem { 
+  text-decoration-line: underline;
+  text-decoration-color: red;
+  text-decoration-style: solid;
+  text-decoration-thickness: 5px;
+} 
+
+
+/* text-align: center; - center text within it parent, for example inside h1 */
+
+/* Use line-height to center text in label instead of setting height. */
+
+/* You can get current color value with currentcolor variable */
+ul {
+	color: red;
+}
+li {
+    border: 1px solid currentColor; /* currentColor: red */
+}
+
+/* Text line shouldn't be very long. */
+/* You can add some letter-spacing if need and line-height should be 1.6 by default. */
+
+/* For styling ul marker use ::marker psudo selector */
+::marker { /* or li::marker */
+    font-size: 2rem;
+    color: red;
+}
+
+/* Specify indent for first text line */
+.item {
+	text-indent: 8px;
+}
+
+
+
+/* MEDIA QUERIES */
+/* Media queries let us add new styles that target only specific conditions. */
+@media media-type and (media-conditions) {  
+}
+
+/* media-type: screen, print, speech */
+/* The media condition let's us target specific condition within that media type: */
+@media (min-width: 600px) { } /* Width */
+@media (orientation: landscape) { } /* landscape - width more then height */
+@media (hover) { } /* hover */
+
+/* Both media types and conditions are optional. But we do need to have a type or condition.
+You can combine a type with a condition by using and: */
+@media screen and (min-width: 960px) {
+    ...
+}
+
+/* You can specify several conditions: */
+/* bg yellow when 100px < screen width < 500px */
+@media (min-width: 100px) and (max-width: 500px) {
+	body {
+		background-color: yellow;
+	}
+}
+
+/* If several queries satisfy current conditions and modify one property the last query will be applied: */
+/* background will be purple when width > 400px */
+/* from a minimum width of 650px and bigger */
+@media (min-width: 650px) {
+    body {
+        background: orange;
+    }
+}
+/* from a minimum width of 400px and bigger */
+@media (min-width: 400px) {
+    body {
+        background: purple;
+    }
+}
+
+/* Usually it is better to set media queries after default selectors that you change in query. */
+
+
+
+/* FORMS */
+/* If you do not want to use label with input, you should use aria-label attribute to set label name*/
+/* for assitive technologies. */
+
+/* input goes with default width. You can overwrite it, for example, to fit the parent container. */
+input {
+	width: 100%;
+}
+
+/* Usually font properties are inherited, but in form they are set default values. */
+/* To make element inherit font properties use inherit keuword. */
+input {
+    font-family: inherit;
+}
+
+/* CHECKED, REQUIRED AND VALIDATION */
+<input type="radio" checked>
+<input type="checkbox" checked>
+<input required> /* require to fill this fieldset */
+type="password/email" /* validates input data */
+<input minlength="8"> /* validates min length of input */
+<input pattern="[a-z0-5]{8,}"> /* validates pattern of input */
+
+/* Specify rows and cols for textarea */
+<textarea rows="3" cols="30"></textarea>
+
+
+
+
+
+/* ANIMATION */
+/* TRANSITIONS */
+/* You can make a property to change throughout some time with transitions. */
+.btn {
+    color: white;
+	transition: color 250ms;  /* which property should change and time */
+}
+.btn:hover {
+    color: white;
+}
+/* the color will be changing during for 250ms */
+
+/* Transition with transform */
+.btn {
+    transform: scale(1);
+	transition: transform 1s;
+}
+.btn:hover {
+    transform: scale(1.2);
+}
+
+
+
+/* ACCESSABILITY */
+/* role - accessibility attribute for screen reader. It's a role for this element. */
+<section role="region"></section>
+
+/* For region role you should add label. The way to do this add aria-labelledby */
+/* attribute with id of label and then create label with this id. */
+<section role="region" aria-labelledby="student-info">
+  <h2 id="student-info">Student Info</h2>
+</section>
+
+/* To make element visible only form screen reader usually is used class .sr-only (you should create it) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+<span class="sr-only">(Date of Birth)</span>
+
+/* aria-hidden - hide element from screen readers */
+<h1 aria-hidden="true"></h1>

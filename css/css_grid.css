@@ -1,0 +1,251 @@
+/* GRID-TEMPLATE-ROWS, GRID-TEMPLATE-COLUMNS AND GRID-TEMPLATE */
+/* To create create css grid set display: grid and specify 
+   rows and columns with grid-template-rows and grid-template-columns */
+/* By default grid has one column */
+.container {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-template-rows: 100px 100px 100px;
+}
+
+/* You can not to specify rows, the grid will set the number of rows automatically. */
+.container {
+  display: grid;
+  grid-template-columns: 50px 50px;
+} 
+
+/* You can use shortcut grid-template to specify rows and columns. First rows then columns. */
+.container {
+	grid-template: 50px 50px / 1fr 1fr 1fr;	
+}
+
+
+
+/* DEFFERENT UNITS, REPEAT, GAP */
+/*
+	fr: sets the column or row to a fraction of the available space,
+	auto: tries to get max column width, set row height by content
+	%: adjusts the column or row to the percent width of its container. 
+	grid-template-columns: auto 50px 10% 2fr 1fr;
+*/
+/*  
+	You can use the repeat method to repeat several units
+    grid-template-columns: 100px repeat(2, 1fr) <=> 100px 1fr 1fr 
+*/	
+
+/* You can use gap properties to specify gap between rows and columns */
+.container {
+	grid-column-gap: 20px; /* gap between columns */
+	grid-row-gap: 5px; /* gap between rows */
+	grid-gap: 20px; /* gap between rows and columns */
+	grid-gap: 10px 20px; /* gap between rows and columns */
+}
+
+
+
+/* ITEMS POSITION */
+/* You can say how many columns / row should item fill. */
+/* For this specify first and last row / column line for it */
+/*
+	1     2      3     4
+   1|-----|------|-----|
+    |     |      |     |
+   2|-----|------|-----|
+    |     |      |     |
+   3|-----|------|-----|
+*/
+.item {
+   grid-column-start: 1;
+   grid-column-end: 3; /* Item takes up 2 columns */
+   grid-row-start: 1;
+   grid-row-end: 3; /* Item takes up 2 rows */
+}
+
+/* There are shortcuts for this props grid-column, and grid-row */
+.item5 {
+   grid-column: 2 / 4;
+   grid-row: 1 / 3;
+}
+/* You can target last line as -1, before it as -2 etc. */
+.item5 {
+	grid-column: 2 / -1;
+}
+/* You also can specify how many cell in a row / column item should takes up */
+.item5 {
+	grid-row: 1 / span 2; /* Should takes up 2 cells in a row */
+}
+/* Or even specify only span. It's need in a responsive grid, see later. */
+.item5 {
+	grid-row: span 2;
+} /* or */
+.item5 {
+	grid-row: span 2;
+}
+
+/* GRID-TEMPLATE-AREAS */
+/* You can specify template how items should be laid with grid-template-areas property */
+/* The specify for every item where it should lay with grid-area property */
+.container {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 40px auto 40px;
+    grid-template-areas: 
+        "m h h h h h h h h h h h"
+        "m c c c c c c c c c c c"
+        "f f f f f f f f f f f f";
+}
+.header {
+    grid-area: h;
+}
+.menu {
+    grid-area: m;
+}
+.content {
+    grid-area: c;
+}
+.footer {
+    grid-area: f;
+}
+
+/* To make cell empty use . */
+.container {
+	grid-template-areas: 
+        ". h h h h h h h h h h ."
+        "m c c c c c c c c c c c"
+        ". f f f f f f f f f f f";
+}
+
+/* Specify area without grid-template-areas */
+.menu {
+    grid-area: 2 / 2 / -2 / -2;
+}
+
+
+
+/* RESPONSIVNESS */
+/* We want don't hardcode columns count. Instead calculate them based on minimum column width */
+/* Also we don't what have some space on the right of the grid before enough space for new column will be */
+/* For this use this construction */
+.container {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+	/* Browser creates columns with minsize 100px. If we have some more space
+       for example 350px 3 columns takes up all space equally (as we use minmax(.., 1fr))
+	   There will no any empty space. */
+}
+/* Note with grid-template-columns: repeat(auto-fit, 100px) 
+   we will have some empty space at the right side */
+/* You can also use auto-fill instead of auto-fit. Different is that 
+   if we don't have enough items to fill one line in grid auto-fill
+   will add new columns with size of 100px, and auto-fit will add empty columns
+   so items will fill all space equally (because of 1ft)
+*/
+.container {
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+}   
+ 
+
+/* If you grid need more rows then you specify explicitly, 
+   you can set their height with grid-auto-rows property */
+.container {
+	grid-template-rows: 100px 100px;
+    grid-auto-rows: 100px; /* third, fourth, ... rows will have height 100px */
+}
+/* Note, if you don't define grid-template-rows and define grid-auto-rows,
+   all rows will have height from grid-auto-rows */
+
+/* By default when browser fills the grid it goes along first row and set items there
+   then along the second column and so on */
+/* If we set different spans for some elements there can be some holes a grid.
+   You can fix it with grid-auto-flow property, which specifies algorithm, that
+   fills the grid. */
+/* By default the values is row, specify dense. So browser will try not has holes in the grid. */
+/* Example, grid */
+.container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-auto-rows: 75px;
+    grid-auto-flow: dense;
+}
+.horizontal {
+    grid-column: span 2;
+}
+.vertical {
+    grid-row: span 2;
+}
+.big {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+
+
+/* NAMED GRID LINES */
+/* You can name grid lines and the use it in your elements to specify element edges */ 
+/* Note, you can give more then 1 name for a line. */
+.container {
+    grid-template-columns: [main-start] 1fr [content-start] 5fr [content-end main-end];
+    grid-template-rows: [main-start] 40px [content-start] auto [content-end] 40px [main-end]; 
+}
+.header {
+    grid-column: main-start / main-end;
+}
+.menu {}
+.content {
+    grid-column: content-start / content-end;
+}
+.footer {
+    grid-column: main-start / main-end;
+}
+
+/* If you name lines as something-start and something-end you can leave outline
+   start and end suffixes in elements */
+.container {
+    grid-template-columns: [main-start] 1fr [content-start] 5fr [content-end main-end];
+    grid-template-rows: [main-start] 40px [content-start] auto [content-end] 40px [main-end]; 
+}
+.header {
+    grid-column: main;
+}
+.menu {}
+.content {
+    grid-column: content;
+}
+.footer {
+    grid-column: main;
+}
+
+/* Or even use grid-area in the element. Note in this case element should be boxes
+   from all 4 sides in right lines */
+.content {
+    grid-area: content;
+}
+
+
+
+/* Alignment */
+/* If your grid has width / height more then sum of sizes of columns / rows
+   you can align columns rows.
+   For columns use justify-content, for row use align-content.
+   Values can be flex-start, flex-end, center, space-between, space-around, space-evenly */
+.container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(2, 100px);
+    justify-content: space-around;
+    align-content: center;
+}
+
+/* By default all items are stretched horizontally and vertically in their areas. */
+/* You can change this with properties justify-items (horizontally) and align-items(vertically).
+   Possible values are flex-start, flex-end, center and stretch. */
+.container {
+    justify-items: flex-start;
+    align-items: center;
+}
+
+/* You can align just one item with properties justify-self and align-self */
+.content {
+    justify-self: center;
+    align-self: flex-start;
+}

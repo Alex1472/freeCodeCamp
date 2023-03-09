@@ -1,0 +1,184 @@
+/* TRANSITIONS */
+/* Use transition to set the time of changing a property */
+/* transition: propertyName time; */
+.heading {
+    color: darkblue;
+    font-size: 15px;
+    transition: color 2s; /* change color for 2s */
+}
+
+.heading:hover {
+    color: brown;
+    font-size: 25px;
+}
+
+/* For several properties use comma to separate them */
+.heading {
+	transition: color 2s, font-size 2s;
+}
+
+/* To transition all properties use the word all. */
+.heading {
+    color: darkblue;
+    font-size: 15px;
+    transition: all .5s; /* transition color, font-size and letter-spacing */
+}
+
+.heading:hover {
+    color: green;
+    font-size: 20px;
+    letter-spacing: 10px;
+}
+
+
+/* Different transition properties */
+/* With transition-property you can specify the names of the properties for the transition. Use property name as value or all */
+/* Use transition-duration to specify the duration of the transition
+/* You can delay the start of the transition with the property transition-delay */
+/* Use transition-timing-function to specify easy-function for transition. Default value is linear, another value is ease */
+/* Use cubic-bezier function to specify custom easy-function */
+.heading {
+    color: darkblue;
+    font-size: 15px;
+	transition-property: font-size, color;
+    transition-delay: .5s;
+    transition-duration: 1.5s;
+    transition-timing-function: ease-in;
+}
+
+.heading:hover {
+    color: red;
+    font-size: 25px;
+}
+
+
+/* You can transition shortcut to specify all 4 properties on 1 line. */
+/* transition: name, duration, timing-function, delay */
+.heading {
+	transition: font-size 0.5s ease-in 1s;
+}
+
+/* For several properties */
+.heading {
+    transition: font-size 0.5s ease-in 1s, color 0.5s ease-in 1s;
+}
+
+
+
+/* ANIMATION */
+/* We specifying animation and then saying apply it to element */
+/* First we should specify animation */
+/* There are two ways to do this. */
+/* First with from and to */
+@keyframes grow { /* specify animation name */
+	from { width: 50px; height: 50px; background-color: red; } /* Properties at start */
+	to { width: 100px; height: 100px; background-color: green; } /* Properties at end */
+}`
+
+/* If your animation has several steps previous way is not suitable */
+/* The second way is to specify steps as percent of eloluation */
+/* It's better to specify all properties on any step no matter chages it on this step or not. */
+@keyframes grow {
+    0% { width: 50px; height: 50px; background-color: red; } 
+    50% { width: 100px; height: 50px; background-color: blue; }
+    100% { width: 100px; height: 100px; background-color: green; }
+}
+
+
+/* When keyframes are ready you should add this animation to an element. */
+/* Use animation-name to specify animation in the element selector */
+/* Use animation-duration to specify animation duration */
+/* Use animationo-delay to specify delay for the animation after page loading */
+/* Use animation-iteration-count to specify how many times animation should be ran. You can say 1, 2, 3, .., infinite */ 
+.box {
+    animation-name: grow;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+}
+
+/* You can specify animation timing function as for transition */
+/* There are some predifined values like ease, ease-out */
+/* You can use cubic-bezier function to define easy-function */
+/* You should specify 4 coords x and y for 2 intermediate points */
+/* start and end point have coords (0, 0), (1, 1) */
+/* Line goes to from start point to first intermediate point then to second intermediate point */
+/* And then to the end. */
+.box {
+	animation-timing-function: cubic-bezier(.62,.15,.4,.9)
+}
+
+/* With animation direction you can define how animation should be evaluated */
+/* normal - from start to end; reverse - from end to start */
+/* alternate from start to end and from end to start */
+/* alternate-reverse - from end to start and from start to end */
+/* animation-fill-mode specify should we save end animation property values or reset them to default element property values
+/* forwards - save, backwards - reset, both - don't understand, but use with animation-direction alternate 
+   so that the end animation values won't be reset */
+.box {
+	animation-timing-function: ease;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+}
+
+/* You can use animation shortcut for all this properties (except fill-mode) */
+/* Signature: animation: name time timing-function delay iteration-count direction */
+.box {
+	animation: grow 1s ease-in 1s 4 alternate;
+}
+
+
+
+/* TRANSFORM */
+/* Use transform property to transform elements */
+/* With transforms we transforming coord system */
+/* Element center has coords 0, 0 */
+/* For example, we translate coord system on 10px right */
+/* New coord center will be 10px right and element has the same coords in it. */
+
+/* You can specify center of the transform by defining transform-origin */
+/* Like this you can specify coordinate system center (by default center of item) */
+.item {
+	transform-origin: 0% 0%; /* left top of item */ 
+}
+
+/* You can specify several function in a transform property */
+.item {
+	transform: scaleX(2) scaleY(4);
+}
+
+/* Scale */
+/* Use scaleX(dx), scaleY(dy) and scale(dx, dy) to scale element along x and y axes */
+.item { /* increase size into 2 times along x, and 4 times along y*/
+	transform: scale(2, 4);
+}
+
+/* Translate */
+/* Use translateX(dx), translateY(dY) and translate(dx, dy) to translate element along x and y axes */
+/* You can use any unit in translate method. You can specify percents there. It will be percents of element size. */
+.item {
+	transform: translate(50%, 50%);
+}
+
+/* Rotate */
+/* Use rotate method to rotate element */
+/* It rotates an element around it center */
+.item {
+	transform: rotate(90deg);
+}
+
+/* Skew */
+/* Use skewX, skewY, skew to skew elements along x and y axes */
+.item {
+	transform: skewY(50deg);
+}
+
+
+
+
+
+
+
+
+
+
