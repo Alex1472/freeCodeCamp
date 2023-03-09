@@ -44,6 +44,13 @@ git log -1
 git log -5 --oneline
 
 
+# GIT BLAME
+# You can use git blame to show who create lines in a file (line by line)
+git blame filename
+# You can specify line range for which you want to show information
+git blame -L 5,15 filename
+
+
 # GIT DIFF
 # See changes in a repo.
 git diff #It shows changes only for unstaged files
@@ -52,6 +59,8 @@ git diff #It shows changes only for unstaged files
 # GIT BRANCH
 # Show all branches in your repository
 git branch
+# Show remote branches
+git branch -r
 # Create new branch (and do not checkout)
 git branch new_branch_name
 # Delete branch
@@ -144,3 +153,38 @@ git revert HEAD
 
 
 ls -a # show hidden directories 
+
+
+
+# REMOTE
+# sets the default remote branch for the current local branch.
+# it's only set this branch as default remote, not create it. If the <remote branch> isn't exist
+# will be an error.
+git branch --set-upstream-to <remote-branch> 
+git branch --set-upstream <remote-branch> - deprecated
+
+# To create remote branch and push into it use
+git push -u origin new-remote-branch-name
+
+# When you push from feature branch, you can merge it into your main branch with
+# pull request (merge request)
+# Merge creates additional commit that connects feature and main brunch and moves main branch to it.
+# Feature branch stays on previous position.
+
+# When you pull changes from the remote branch you just get commits and move local and remote branch
+# If in local and remote branches occured new commit new merge commit will be created.
+
+# If you try to pull into a branch that has new commit on a server there will be an error.
+# You should pull this changes first.
+
+
+
+# GIT REMOTE
+# Show all remote repository
+git remote
+
+# Show remotes with thier addresses
+git remote -v
+
+# Add remote
+git remote add remote-name git@github.com:Alex1472/test-repo.git # specify remote name and address

@@ -1,0 +1,10 @@
+https://picsum.photos/  -  api with different images
+https://cssbattle.dev/  -  css battle, create images with css
+https://overreacted.io/ -  react blog
+https://30secondsofinterviews.org/ - questions for interviews
+https://www.pythontutorial.net/ - python tutorial (casual)
+https://realpython.com/ - many arcticles about python
+https://www.orioniconlibrary.com/all-icons - png / svg icons to download
+https://favicon.io/favicon-generator/ - favicon generator
+https://fontawesome.com/icons/heart?s=solid&f=sharp - svg icons to use in app
+https://caniuse.com/ - check which versions of browser support css / js features

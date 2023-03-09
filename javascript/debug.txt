@@ -1,6 +1,4 @@
 console.log("Some text");
 console.clear();
-
-typeof
-typeof [] //array is object
-typeof {} //object
+console.dir(); // show all object with attributes
+show one border in a table, instead of for every cell
