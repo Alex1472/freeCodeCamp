@@ -1,3 +1,5 @@
+# DESCRIPTORS
+# __GET__, __SET__, __DELETE__, __SET_NAME__
 # You can incapsulate property logic in a class. This class has name descriptor.
 # It should implement __get__, __set__ or __delete__ method.
 
@@ -7,7 +9,7 @@ class StringProperty:
     def __set_name__(self, owner, name):
         self.prop_name = name
 
-# __get__ receives instance and type class of class where descriptor is
+# __get__ receives instance and type class of class where descriptor is determined
 # Note that owner is type of instance. (in case of inherinance)
     def __get__(self, instance, owner):
         return instance.__dict__[self.prop_name]
@@ -32,7 +34,8 @@ print(person.first_name) # __get__ works
 del person.first_name # __delete__ works
 	
 	
-	
+
+# GET DESCRIPTORS FROM CLASS
 # If you try to get first_name with class instance __get__ will be invoked with instance = None, owner = Person
 l = Person.first_name 
 
@@ -51,7 +54,6 @@ print(Person.first_name) # Error, there is no first_name attribute
 
 # 1. Data descriptors.
 # Python always at first tries to use data descriptors no matter is there instance attribute with the same name.
-
 class StringProperty:
     def __get__(self, instance, owner): # if data descriptor implements __get__, it will be used. Else python tries to find attribute in __dict__, in class and so on.
         print('get')
@@ -66,6 +68,7 @@ person.__dict__['first_name'] = 'Alex'
 person.first_name = 'Tom' # use __set__
 name = person.first_name # use __get__
 
+
 # 2. Non-data descriptors.
 # Python at first tries to get instance attribute and then tries to use non-data descriptor.
 class StringProperty:
@@ -74,7 +77,6 @@ class StringProperty:
 
 class Person:
     first_name = StringProperty()
-
 
 person = Person()
 person.__dict__['first_name'] = 'Alex'
@@ -90,28 +92,32 @@ print(person.__dict__['first_name']) # 'Jack'
 
 
 
+# EXAMPLE: CACHED PROPERTY
 # You can use non-data descriptors to calculate and property value. When you first try to get property value, the value will be calculated 
 # and added to instance __dict__. Then you will get the property value from the instance __dict__
-class CachedDescr:
-    def __set_name__(self, owner, name):
-        self._name = name
+class cached_property:
+    def __init__(self, method):
+        self._method = method
 
-    def __get__(self, instance, owner): # It will be calculated only one time.
-        if instance is None: # if we invoke Person.name
-            return self
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self # return self, if we getting property from class object
+        value = self._method(instance)
+        setattr(instance, self._method.__name__, value) # setting instance.__dict__[self._method.__name__] = value
+        return value
+
+
+class Nope:
+    @cached_property
+    def calc(self):
         print('Calculating...')
-        instance.__dict__[self._name] = 42 # Add to instance __dict__
-        return instance.__dict__[self._name]
+        return 42
 
+nope = Nope()
+print(nope.calc)
+print(nope.calc)
+print(nope.calc)
 
-class Person:
-    name = CachedDescr()
-
-
-person = Person()
-print(person.name) # calculating property
-print(person.name) # get from instance __dict__
-print(person.name) # get from instance __dict__
 
 
 # THE PROPERTY IMPLEMENTATION.
@@ -180,7 +186,7 @@ print(person.__dict__) # {}
 
 
 # METHODS
-# We know that there ara function and bound methods
+# We know that there are function and bound methods
 class Person:
     def __init__(self, name):
         self._name = name

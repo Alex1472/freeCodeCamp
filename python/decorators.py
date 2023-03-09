@@ -1,4 +1,4 @@
-# FUNCTIONS:
+# DECORATOR DEFINITION:
 # You can wraps one function into another. The wrapper function is called decorators.
 def logger(fn): # Decorator, accepts raw function, return wrapper.
     def wrapper(*args, **kwargs):
@@ -23,13 +23,14 @@ say_hello('Tom') #it's wrapper
 
 
 
+# FUNCTOOLS.WRAPS
 # There is problem that we loose name and doc of the original function.
 print(wrapper.__name__) # wrapper
 print(wrapper.__doc__) # None
 
 # We can fix this with the wraps decorator from the functools module.
 def logger(fn):
-    @wraps(fn)
+    @functools.wraps(fn)
     def wrapper(*args, **kwargs):
         print(fn.__name__)
         return fn(*args, **kwargs)
@@ -42,9 +43,10 @@ print(wrapper.__doc__) # 'This function says hello.'
 
 
 
+# DECORATOR WITH PARAMETERS
 # If we want that decorator accepts parameters, we should create functions that return decorator, that returns wrapper.
-def star(n):
-    def decorate(fn):
+def star(n): # remember decorator's arguments
+    def decorate(fn): # accept decorator's function
         @wraps(fn)
         def wrapper(*args, **kwargs):
             print('*' * n)
@@ -68,6 +70,7 @@ Hello, my name is Tom.
 
 
 
+# CLASS DECORATORS
 # You can wrap function with class and make it callable
 class Logger:
     def __init__(self, fn):
@@ -91,6 +94,7 @@ Hello, my name is Tom.
 
 
 
+# CLASS DECORATOR WITH PARAMETERS
 # You can use class for decoration with paramenters.
 # You should create class that accepts in constructor paramenter and implement __call__ method that wraps a function.
 # And decorate function with instance of class.
@@ -120,10 +124,63 @@ Hello, my name is Tom.
 """
 
 
+# DECORATOR WITH PARAMETERS 2
+# But we want to write decorators with parameters more easy, like this
+@with_arguments
+def star(f, n):
+    def inner(*args, **kwargs):
+        print("*" * n)
+        res = f(*args, **kwargs)
+        print(res)
+        print("*" * n)
+        return res
+    return inner
+
+@star(10)
+def identity(x):
+    return x
+
+identity(5)
+
+# Let's create decorator for decorators for this case
+def with_arguments(deco): # first, accept deco and return function that accepts deco parameters
+    @functools.wraps(deco)
+    def args_cont(*args, **kwargs): # accept deco parameters, and return function that accept func to decorate
+        def func_cont(f):
+            wrapper = deco(f, *args, **kwargs) # run new deco, and pass the function and deco params
+            functools.update_wrapper(wrapper, f) # update wrapper attributes
+            return wrapper
+        return func_cont
+    return args_cont
+
+
+
+# DECORATORS WITH PARAMETERS 3
+# You can write decorator with parameter easier way
+def star(f=None, *, n=5):
+    if f is None: # if use parameters
+        return lambda f: star(f, n=n)
+    
+    def inner(*args, **kwargs):
+        print("*" * n)
+        res = f(*args, **kwargs)
+        print(res)
+        print("*" * n)
+        return res
+    return inner
+
+@star(n=10)
+def identity(x):
+    return x
+
+@star
+def identity(x):
+    return x
+
+
 
 # By the way decorator can return any object not always funtion.
 def empty(fn):print(identity(1))
-
     return 0
 
 @empty
@@ -160,9 +217,8 @@ identity = add_one(square(identity))
 
 
 
-FUNCTOOLS
-You can use LRU_CACHE to cache last several function calls. You can specify this with the maxsize parameter.
-
+# FUNCTOOLS
+# You can use LRU_CACHE to cache last several function calls. You can specify this with the maxsize parameter.
 from functools import lru_cache
 
 @lru_cache(maxsize=250)
@@ -178,7 +234,8 @@ print(identity.cache_info()) # CacheInfo(hits=400, misses=100, maxsize=250, curr
 # misses - how many times the function was calculated
 
 
-With function PARTIAL you can fix some function arguments (positional or keyword)
+
+# With function PARTIAL you can fix some function arguments (positional or keyword)
 import functools
 
 def multiply(a, b):
@@ -193,9 +250,10 @@ print(times3(3)) # 9
 print(times4(5)) # 20
 
 
-You can add different behaviour for function depending on its arguments type with singledispatch.
-You can decorate base behaviour with the singledispatch decorator.
-The this function get the decorator registor and you should use it to add behavior for specify types.
+
+# You can add different behaviour for function depending on its arguments type with singledispatch.
+# You can decorate base behaviour with the singledispatch decorator.
+# The this function get the decorator registor and you should use it to add behavior for specify types.
 import functools
 
 @functools.singledispatch # specify base behaviour
@@ -215,7 +273,7 @@ say_type('eee') # str
 say_type([]) # Unknown type
 
 
-In functools there is the reduce function that accumulate a value from a sequence.
+# In functools there is the reduce function that accumulate a value from a sequence.
 res = functools.reduce(lambda acc, x: acc * 10 + int(x), '1234', 0) # 0 - initial value
 print(res) # 1234
 print(type(res)) # int
@@ -225,6 +283,7 @@ print(res) # 10
 
 
 
+# CLASS DECORATORS
 # You can also apply decorators to class. In this a function receives class instance and returns something. And that object will be in class variable
 def obsolete(cls): # decorator will return the same class, but changes the constructor so that it print warning.
     old_init = cls.__init__
@@ -242,7 +301,6 @@ class A:
 
 a1 = A() # 'This class is obsolete.'
 a2 = A() # 'This class is obsolete.'
-
 
 
 from functools import wraps
@@ -264,7 +322,6 @@ def singleton(cls):
 @singleton
 class A:
     pass
-
 
 a1 = A()
 print(id(a1))
