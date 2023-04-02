@@ -8,6 +8,8 @@ docker version
 # Note, when we run a container from image, on EVERY command new container will be created
 docker run ngnix # run ngnix on you docker host, 
 
+# If you want to stop container use another terminal for this and command docker stop name/id
+
 # Run container and name it as you want
 docker run --name container_name image_name
 docker run --name webapp ngnix
@@ -26,6 +28,8 @@ cat /etc/*release*
 # Use exit to exit from this terminal
 exit
 
+# Also you can append command to run command
+docker run ubuntu cat /etc/*release*
 # run centos and sleep 20 second. Container will be running this time.
 docker run centos sleep 20
 
@@ -57,6 +61,7 @@ docker container prune
 # docker images - show all downloaded images
 docker images
 
+
 # docker rmi - remove image
 # Note, you must remove all container for this image first
 docker rmi nginx
@@ -72,7 +77,8 @@ docker exec 32o cat /etc/hosts
 
 # By default containers run on a foreground, in attach mode
 # So, if you run container with a server, in your terminal you will so output from this server
-# But can do anything else. Use ctrl + c to stop a container
+# But can't do anything else. 
+# If you want to stop container use another terminal for this and command docker stop container_name/id
 docker run image_name
 
 # If you what to run container on a background use command docker run -d
