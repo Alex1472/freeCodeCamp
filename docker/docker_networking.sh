@@ -14,7 +14,7 @@ docker network ls
 # Containers can access each other using this ips, you also can get containers with
 # this ip on the host
 
-# To access this container outside, you should port of the container to port on docker host
+# To access this container outside, you should map port of the container to port on docker host
 docker run -d -p 8080:8080 jenkins/jenkins # now you can access it as localhost:8080
 
 
@@ -59,5 +59,17 @@ docker network rm my-network
 # How docker implement networking?
 # Docker create separate namespace for each container.
 # It then uses virtual internet pairs to connect containers together.
+
+
+
+# Connect node-app with mongo using mongoose
+# docker compose automatically creates network for your containers, that has dns service
+# you can service name instead of ip for reference the container
+const mongoose = require("mongoose");
+mongoose
+    .connect("mongodb://mongo:27017?authSource=admin") # use service name
+    # .connect("mongodb://172.21.0.2:27017?authSource=admin") # or you can use ip addres, use docker inspect command to find out it
+    .then(() => console.log("Successfully connected to db..."))
+    .catch((e) => console.log(e));
 
 

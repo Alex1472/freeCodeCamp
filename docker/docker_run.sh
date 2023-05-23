@@ -67,15 +67,23 @@ docker logs er34
 # Create environment variable in terminal
 export ENV=test 	
 	
-# You can get this variable with os.environ
+# You can get this variable with os.environ (python)
 import os
 print(os.environ['NAME'])
 print(os.environ['ENV'])
 
 # To pass variable into docker container use flag -e
 docker run -e NAME=TOM -e ENV=Rrr test-env-vars
+# Or you can specify file for env variables, usually it called .env
+# .env-file
+PORT=5000
+A=5
+B=10
+# And specify in the docker run command with the --env-file parameter
+docker run -d --name node-app --env-file .env node-app-image
 
 # You can inspect env variables in a container with command inspect
 docker inspect container_name/id
 # Then look at Config -> Env
-
+# Or you can open bash in the container (use docker exec command),
+# and run bash command printenv

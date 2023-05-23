@@ -82,6 +82,10 @@ docker run -v data_volume:/var/lib/mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysq
 # BIND MOUNTING
 # You can mount another folder instead of volume, in this case you should specify all path to folder
 docker run -v /data/mysql:/var/lib/mysql mysql
+# Note, by default volumes is a two-way road, so container can change the source file
+# To avoid this, you can use read-only volumes with :ro in the end.
+# With this container only can read files, not update, create, delete.
+docker run -d --name node-app -p 3000:3000 -v D:\DifferentReps\DockerProjects\LearnDockerProject\:/app:ro node-app-image
 
 # Using -v is an old way to mount folder, new way is using --mounts
 docker run --mount type=bind,source=/data/mysql,target=/var/lib/mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql
@@ -110,3 +114,26 @@ docker info # and see storage driver section
 docker system df
 # If you want to see detailed information use flag -v:
 
+
+
+version: "3"
+
+services:
+    redis:
+        image: redis
+        
+    db:
+        image: postgres:9.4
+        
+    vote:
+        image: dockersamples/examplevotingapp_vote
+        ports:
+            - 5000:80
+            
+    worker:
+        image: dockersamples/examplevotingapp_worker
+        
+    result:
+        image: dockersamples/examplevotingapp_result
+        ports:
+            - 5001:80

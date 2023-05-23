@@ -31,7 +31,7 @@
 # Let's look at it.
 # Algorithm uses random timers to initiating requests
 
-# For example, random timer is kicked of on the three managers
+# For example, random timer is kicked off on the three managers
 # The first on to finish the timer sends out a request to the other managers requesting
 # permission to be the leader.
 # The other managers on receiving the request responce with their vote
@@ -44,7 +44,7 @@
 # and the new leader is identified
 
 # Every manager has its own copy of Raft database that stores information about entire cluster.
-# And it's importent that they're all in sync.
+# And it's important that they're all in sync.
 # If the leader make a decision(for example add a worker), it has to notify the other two managers,
 # get responce from at least one of them to meet QUORUM. And then commit the changes to the database 
 # on all master nodes. This ensures that any changes in the environment is made with consent
@@ -98,7 +98,7 @@ docker swarm join --token some_token 192.168.56.101:2377
 # You can get this command to join the cluster as worker with command:
 docker swarm join-token worker
 # if you host has multiple api addresses you will get error
-choose an IP address to advertise since system hass multiple addresses
+choose an IP address to advertise since system has multiple addresses
 on different interfaces
 # in this case you should select one with --advertise-addr option
 docker swarm init --advertise-addr 192.168.56.101 
@@ -172,7 +172,7 @@ docker service create --replicas=3 -p 8080:80 --network frontend my-web-server
 # In this case number of instances is irrespective of the number of underlying worker nodes
 
 # In another case you don't want to specify the number of replicas of a service
-# Instead you want one instace of a service placed on all nodes in the cluster
+# Instead you want one instance of a service placed on all nodes in the cluster
 # This is called GLOBAL SERVICES.
 # To place app on all nodes use option --mode global
 docker service create --mode global app-name
@@ -255,7 +255,7 @@ docker service create --replicas 2 --network my-overlay-network nginx
 
 
 # DOCKER STACKS
-# Before we run individual containers. Insteade of running several containers 
+# Before we run individual containers. Instead of running several containers 
 # we used docker compose and docker-compose file
 # With docker swarm we run docker services. What if we want run several 
 # services together
@@ -268,10 +268,12 @@ docker service create --replicas 2 --network my-overlay-network nginx
 # one redis container. Constainers of different (and the same) services can 
 # run on the same node.
 
+# You can use docker-compose file with docker swarm. For this you need to add several
+# docker swarm related properties to the file
 # Let's look on docker compose file
 # You should have docker compose file at least version 3 for docker stack configuration
 # We trimmed out ports and networks options for simplicity.
-# We add a deploy property for each service. It can contains sereral properties
+# You need to add the DEPLOY property for every container. It can contains several properties
 # docker-compose.yml:
 version: 3
 services:
@@ -307,18 +309,35 @@ services:
 	    image: worker
         deploy:
 		    replicas: 1
+
+# You can specify another options for deploy
+deploy:
+    replicas: 8
+    update_config: # config about updating containers if the image has changed
+        parallelism: 2 # The number of containers to update at a time.
+        delay: 20s # The time to wait between updating a group of containers.
+    restart_policy: # Configures if and how to restart containers when they exit.
+        condition: any # restart with any reason of failure
 			
 # To run stack use command, use the --compose-file flag to specify .yml file
 docker stack deploy app-name --compose-file docker-stack.yml
-# You can update your stack by changing .yml file and running stack deploy command again
-# This will not stop the services just update them
+# Or use flag -c (shortcut)
+docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml myapp
+# You can update your stack in case of changing .yml file or changing image by running stack deploy command again
+# This will not stop the services just update them 
 docker stack deploy app-name --compose-file docker-stack.yml
 
 # Use docker stack rm to stop stack
 docker stack rm app-name
 
-# Use docker stack ls to show all services
+# Use docker stack ls to show all stacks (sets of services)
 docker stack ls
+
+# Use docker stack services stack_name to show all services of the stack
+docker stack services stack_name
+
+# Use docker service ls to list all services across all stacks
+docker service ls
 
 # Use docker stack ps command to show all tasks(containers) of the service
 docker stack ps service_id
