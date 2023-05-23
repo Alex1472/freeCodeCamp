@@ -2,6 +2,14 @@
 py main.py
 python main.py
 
+
+# You can use environment(bash) variable in python
+export ENV=test # create env variable
+# Use os.environ to get environment varible in python
+import os
+print(os.environ['ENV'])
+
+
 # Also you can use intepreter in terminal. To do this type into python / py. Then enter you code:
 py
 

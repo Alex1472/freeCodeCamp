@@ -27,6 +27,9 @@ use blog
 Drop Database
 db.dropDatabase()
 
+From docker, user=admin, password=admin
+docker exec -it 7d  mongosh -u "admin" -p "admin"
+
 
 
 

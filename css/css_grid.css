@@ -24,7 +24,7 @@
 /* DEFFERENT UNITS, REPEAT, GAP */
 /*
 	fr: sets the column or row to a fraction of the available space,
-	auto: tries to get max column width, set row height by content
+	auto: set column width by content(but if there is free space(no fr columns) it gets all space), set row height by content
 	%: adjusts the column or row to the percent width of its container. 
 	grid-template-columns: auto 50px 10% 2fr 1fr;
 */

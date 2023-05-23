@@ -41,10 +41,13 @@ alt + F12 # show definition
 F12 # go to definition
 ctrl + R # change project
 ctrl + shift + space # hint for parameters in function
+ctrl + arrow up / arrow down # scroll up / down without moving the cursor
 
 # LINES / WORDS HANDLING
 alt + arrow up / down # move line up / down
 alt + shift + arrow up / down # copy line up / down
+ctrl + backspace # delete to the start of the work / previous word
+ctrl + del # delete to the end of the word / next word
 ctrl + k, ctrl + ] / [ # unfold / fold region
 ctrl + k, ctrl + o / j # fold / unfold all regions
 ctrl + shift + \ # jump to matched bracket
@@ -73,6 +76,11 @@ F2 # rename variable
 # TURBO CONSOLE LOG extension
 # ctrl + alt + L - create console.log
 # alt + shift + c - comment all console.log
+
+# OPEN IN BROWSER
+# You can open current file in browser with 
+# Alt + B - open in browser
+# Alt + Shift + B - choose browser and open
 
 
 

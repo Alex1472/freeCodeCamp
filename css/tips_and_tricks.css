@@ -88,6 +88,89 @@ table {
 animation: size-down ease-out 0.5s infinite alternate both;
 /* Prefix property */
 -webkit-animation: size-down ease-out 0.5s infinite alternate both;
+/* -webkit - prefix for ios and tablet browsers(Safari) */
+-webkit-animation
+/* -ms - prefix for Microsoft old versions of Internet Explorer */
+-ms-animation
+/* -moz - prefix for Firefox */
+-moz-animation
+/* -o - prefix for Opera browsers */
+-o-animation 
+
+/* @IMPORT */
+/* You can import one css-file into another */
+/* base.css */
+body {
+	background-color: blue;
+}
+/* styles.css */
+@import "base.css" /* importing base.css */
+
+/* DIFFERENT CSS SOURCES */
+/* In computing, a user agent is any software, acting on behalf of a user, which "retrieves, renders 
+   and facilitates end-user interaction with Web content".
+   Some prominent examples of user agents are web browsers and email readers. */
+   
+/* CSS comes from different sources
+   1) User-agent stylesheets
+   User-agent, or browsers, have basic style sheets that give default styles to any document. 
+   These style sheets are named user-agent stylesheets.
+   2) Author stylesheets
+   Author stylesheets are the most common type of style sheet; these are the styles written by web developers.
+   3) User stylesheets
+   In most browsers, the user (or reader) of the web site can choose to override styles using a custom user 
+   stylesheet designed to tailor the experience to the user's wishes.
+   
+   Browser uses css from these sources in this order:
+	1.	user-agent (browser)	normal
+	2.	user	normal
+	3.	author (developer)	normal
+	4.	CSS @keyframe animations	
+	5.	author (developer)	!important
+	6.	user	!important
+	7.	user-agent (browser)	!important
+	8.	CSS transitions
+*/
+
+/* INITIAL, INHERIT, UNSET, REVERT */
+/* https://www.youtube.com/watch?v=N8tFrMZp_wA&t=2s */
+
+/* Initial valus says reset property value to initial value */
+/* Note, usually element get default value from user-agent stylesheet,
+when we set initial value, we reset and this value.
+*/
+/* For example if we set dislay: inidial for p, in becomes inline, because block comes from user-agent stylesheet */
+p {
+ display: initial;
+}
+ 
+/* Inherit says, go to parent and give his value */
+/* In example, there will be border around p element */
+<div>
+	test
+	<p>test paragraph</p>
+</div>
+
+div {
+    border: 1px solid black;
+}
+p {
+    border: inherit;
+}
+/* Note, it goes only to parent element */
+/* For example, if body has border, there won't be a border around p, only around body. */ 
+body {
+    border: 1px solid black;
+}
+p {
+    border: inherit;
+}
+
+/* Unset set value to inherit, if the property inherited (see specification), 
+   or initial - if not */
+
+/* revert set default value from user-agent stylesheet */
+
 
 
 
@@ -222,16 +305,22 @@ a:focus {
 }
 
 /* SELECTORS SPECIFICITY */
+/* NOTE, you can find how property value was calculated in Element->Calculated in Browser Debug Tool */
+
 /* We want to know which rull will be applied to element that selected several ways.
-We can think, that
-	1) Element has 1 point
-	2) Class has 10 points
-	3) Id has 100 points
-Selector with the largest number of point will win.
-So id has more spicificity that class.
- 
-Compound selector has spicificity equals to sum of points of it parts.
-.links-container a - 11 points */
+We can think, that there are for numbers (0, 0, 0) - (id, class, element) 
+We count different element in selectors, for example:
+.test nav  - (0, 1, 1)
+#el_id nav  -  (1, 0, 1)
+Then we select selector with biggest first number, if equal with biggest second number, then third
+In our case #el_id nav wins
+
+!important applied an first order. If several props has !important
+their selector will be compared as above
+
+>, +, ~ do not change specificity
+.test > nav has the same specificity as .test nav 
+ */
 
 
 
@@ -324,6 +413,12 @@ rgb(255,0,0) == #FF0000
 	background-blend-mode: multiply;
 }
 
+/* -WEBKIT-BOX-REFLECT */
+/* To reflect image above, below, right use propecty -webkit-box-reflect */
+img {
+    -webkit-box-reflect: below;
+}
+
 
 
 /* FONTS */
@@ -380,7 +475,43 @@ li {
 	text-indent: 8px;
 }
 
+/* @FONT-FACE */
+/* You can add you local hosted fonts to css in this css with @font-face */
+/* We have our fonts in folder /asserts/fonts/, our css file in /css/styles.css */
+/* styles.css */
 
+/* In font-face we declare the font-family of the font, its source, its weight, its style, ... */
+/* Then to use this font we just specify declared font-family, weight, ... */
+@font-face {
+    font-family: NotoSerif;
+    src: url(../assets/fonts/NotoSerifLao-ExtraLight.ttf) format('ttf');
+    font-weight: 100;
+}
+@font-face {
+    font-family: NotoSerif;
+    src: url(../assets/fonts/NotoSerifLao-Regular.ttf) format('ttf');
+    font-weight: 400;
+}
+@font-face {
+    font-family: NotoSerif;
+    src: url(../assets/fonts/NotoSerifLao-ExtraBold.ttf) format('ttf');
+    font-weight: 900;
+}
+
+body {
+    font-family: NotoSerif;
+    font-weight: 900;
+}
+/* Note, it's better to use fonts in format .woff / .woff2 as is they have small size */
+/* You can download fonts from fonts.google.com or fontsquirrel.com/ */
+/* Convert into .woff on https://transfonter.org/ */
+
+/* You can set behavior should browser ignore additional spaces (by default) 
+   and should wrap text (by default) */
+.item {
+	white-space: nowrap;
+	white-space: pre-wrap;
+}
 
 /* MEDIA QUERIES */
 /* Media queries let us add new styles that target only specific conditions. */

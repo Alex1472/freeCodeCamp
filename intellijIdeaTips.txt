@@ -1,0 +1,5 @@
+Ctrl + space - show all overloads
+alt + insert - open menu to autogenerate
+
+msvm - write public static void main method
+sout - write System.out.println

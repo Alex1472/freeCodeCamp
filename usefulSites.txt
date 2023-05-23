@@ -1,10 +1,28 @@
-https://picsum.photos/  -  api with different images
-https://cssbattle.dev/  -  css battle, create images with css
+Blogs, Interview preparations:
 https://overreacted.io/ -  react blog
 https://30secondsofinterviews.org/ - questions for interviews
 https://www.pythontutorial.net/ - python tutorial (casual)
 https://realpython.com/ - many arcticles about python
+https://www.tutorialspoint.com/java/ - java tutorials
+http://www.angelikalanger.com/ - java, under the hood of compiler
+https://jenkov.com/ - deep java tutorial
+
+Courses, trainers:
+https://cssbattle.dev/  -  css battle, create images with css
+
+Icons, images:
 https://www.orioniconlibrary.com/all-icons - png / svg icons to download
-https://favicon.io/favicon-generator/ - favicon generator
 https://fontawesome.com/icons/heart?s=solid&f=sharp - svg icons to use in app
+https://favicon.io/favicon-generator/ - favicon generator
+https://picsum.photos/  -  api with different images
+
+Fonts:
+https://www.fontsquirrel.com/ - different fonts to download and convertor
+https://transfonter.org/ - fonts converter
+
+Docker:
+https://labs.play-with-docker.com - play with docker including docker swarm
+https://labs.play-with-k8s.com/ - play with kubernetes
+
+Others:
 https://caniuse.com/ - check which versions of browser support css / js features
