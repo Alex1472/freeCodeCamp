@@ -1,0 +1,30 @@
+NAVIGATION:
+f9 - show menu bar
+tab - change panels
+ctrl + u - swap panels
+ctrl + 1, 2, 3, ... - change view of the panel(ctrl + 2 - default). You can
+show additional information with this. ctrl + 3 very convinent
+alt + f1 / f2 - change drive for left / right panel
+ctrl + o - show terminal
+left/right arrow - got to first / last item in a list
+
+DIRECTORY EDITING:
+ctrl + l - information about the disk
+to open a file in a default application just press enter
+insert / shift + down arrow - select a file / folder. You can see summary information
+about selected files below
+f3 - on a folder, to show a folder size
+f6 - move the file
+f6 + shift - rename the file
+f7 - create a directory
+f5 - copy current file from left panel directory to right panel directory
+f8 - delete file / directory
+
+shift + f1 - add to archive
+shift + f2 - extract from archive
+shift + f4 - create a new file
+
+TERMINAL:
+ctrl + o - show terminal
+ctrl + f - insert full path of selected file into terminal
+ctrl + enter - insert name of selected file into terminal
