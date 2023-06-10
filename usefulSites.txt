@@ -6,6 +6,7 @@ https://realpython.com/ - many arcticles about python
 https://www.tutorialspoint.com/java/ - java tutorials
 http://www.angelikalanger.com/ - java, under the hood of compiler
 https://jenkov.com/ - deep java tutorial
+https://www.youtube.com/@PowerCertAnimatedVideos - good hardware channel
 
 Courses, trainers:
 https://cssbattle.dev/  -  css battle, create images with css

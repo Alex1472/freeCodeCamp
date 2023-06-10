@@ -42,6 +42,10 @@ cat file.txt
 cat < file.txt  -  does the same but with redirection stdin
 # print Alex with redirection stdin with |.
 echo "Alex" | cat
+# You can create file with cat. Run command
+cat > newfile.txt # then enter text and press CTRL + D
+# Also you can append some text to file
+cat >> file.txt # then enter text and press CTRL + D
 
 
 
@@ -56,6 +60,15 @@ echo "Alex" | ./script.sh # redirect output of echo to script.sh
 echo "Alex" | ./script.sh > stdout.txt 2> stderr.txt # redirect output from echo to script.sh. Redirect stdout and stderr to stdout.txt and stderr.txt
 ./script.sh < name.txt > stdout.txt 2> stderr.txt # redirect stdin to name.txt, stdout to stdout.txt and stderr to stderr.txt
 
+
+
+# TEE 
+# tee - read from standard input and write to standard output and files
+cat text.txt | tee text1.txt # print standard input to terminal and overwrites text1.txt
+# Use -a flat append text to file
+cat text.txt | tee -a text1.txt
+# Note, you can work with output of tee 
+cat text.txt | tee -a text1.txt | cat
 
 
 # WC
@@ -92,6 +105,21 @@ grep -o "meow[a-z]*" kitty_ipsum_1.txt
 # You should add -E - extended regex flag, to use some features of regex.
 # Search several patterns
 grep --color -E 'cat[a-z]*|meow[a-z]*'
+# To search recursively in all files in a folder use -r.
+grep -r "some text" . # search "some text" in all files in current directory
+# and subfolders.
+# With the -v flag you can show all lines that don't contain pattern
+grep -v "printed" sample.txt 
+# To find exact word use -w flags
+grep -w exam text.txt
+# You can print lines before or after matching line with 
+# -Acount (after) and -B count (before)
+grep -A1 -B2 third text.txt # additionally pring one line before and 2 line after
+# You can use any positive numbers with -A and -B.
+
+
+
+
 
 
 
@@ -110,8 +138,100 @@ sed "s/catnip/dogchow/g; s/cat/dog/g"
 
 
 
+#DIFF
 diff kitty_ipsum_1.txt doggy_ipsum_1.txt # show diffs between two files.
 diff --color kitty_ipsum_1.txt doggy_ipsum_1.txt # show diffs with color.
 
 
 # You can use $1 in script to retrieve first argument or if there is no input stdin.
+
+
+#DU
+# It summarizes disk usage of the set of FILEs, recursively for directories.
+# In prints disk usage for every file and folder in a specified directory
+du . # for current directory
+# You can specify several file / folders
+du test.txt get-docker.sh
+# You can print only total result for each argument with the flag -s(summarize)
+du -s .
+# You can add flags -k, -m to show results in kb, mb.
+du -sk .
+# For one file
+du -sk test.img # -k size in MG
+du -sh test.img # -h human readable size
+
+
+
+# TAR
+# tar - tape archive
+# Used to archive data
+# Files created with tar often called tarballs.
+# Create an archive
+tar -cf test.tar file1 file2 file3 # -c - create archive, 
+                                   # -f - specify archive name first
+# Show contents of the archive
+tar -tf test.tar # You should specify -f if specifing file name, -t - show contents
+# Extract archive
+tar -xf test.tar # -x - extract
+# By default created archive isn't compressed, to compress use -z option
+tar -czf test.tar file1 file2 file3
+# Use -C to extract to a specified folder
+tar -xf caleston-code.tar -C /opt/ 
+# Unzip .gz archive
+tar -C /opt/ -xvf caleston-code.tar.gz
+
+
+
+
+# BZIP2, GZIP2, XZ, BUNZIP2, GUNZIP, UNXZ, ZCAT, BZCAT, XZCAT
+# There are some commands specifically used for compression
+# They don't save origin file
+bzip2 test.img # Result: test.img.bz2
+bunzip2 test.img.bz2 # Uncompress
+gzip test1.img # Result: test1.img.gzip
+gunzip test1.img.gzip # Uncompress
+xz test2.img # Result: test2.img.xz
+unxz test2.img.xz # Uncomporess
+
+# You can read compressed files with
+# zcat, bzcat, xzcat
+bzcat test.txt.bz2 # result - file content
+
+
+
+# LOCATE, UPDATEDB
+# To find a file use command locate.  It prints all paths with keyword in it.
+locate test2.txt # /home/alex147/test2.txt
+# Note, it depends on database called mlocate.db for querying the file name.
+# If the file you are trying to locate wa created recently, this command
+# may not yield useful results. It is possible that the db has not been updated yet.
+# To update db use the command:
+updatedb
+
+
+
+# FIND
+# Also to search file you can use find command:
+find dir -name filename # search in dir filename
+find . -name test2.txt # search in current directory file with name test2.txt
+./test2.txt
+
+
+
+# DF
+# Show information about the file system on which each FILE resides,
+# or all file systems by default.
+# Show file systems memory usage
+df
+# Show file systems type:
+df -T
+
+
+
+
+
+
+
+
+
+
