@@ -249,7 +249,7 @@ class Foo {
     int x;
     volatile int y; // declared as volatile
 }
-// In first thread we asssin 1 to x and y.
+// In first thread we assin 1 to x and y.
 // In second thread we wait y assignation and print x.
 // Without volatile we don't know when second thread will see the changing
 // of y field. Can be infinite loop.
@@ -464,7 +464,7 @@ this.hasNewFrame = true;  // hasNewFrame is volatile
 this.hasNewFrame = true;
 this.frame = frame;
 this.framesStoredCount++;
-// As in this case we do not refres frame and framesStoredCount in main memory
+// As in this case we do not refresh frame and framesStoredCount in main memory
 // - Happens Before Guarantee for Reads of volatile Variables
 // Reads from and writes to other variables cannot be reordered to occur 
 // before a read of a volatile variable, if the reads / writes originally 

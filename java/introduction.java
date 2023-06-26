@@ -9,7 +9,7 @@
 // Oracle bought Sun
 // 2017 release train model (release every half year). Earlier feature driven
 // release as feature will be ready
-// JAMES GOLING - JAVA'S FATHER
+// JAMES GOSLING - JAVA'S FATHER
 
 // - Java - programming language and platform(language and environment, 
 //   where programs executed)
@@ -60,7 +60,7 @@
 // Interpretation(execution)                           In a processor
 
 // Javascript - Just-in-time compilation, V8
-// Source code hello.c                                 On disk
+// Source code hello.js                                On disk
 // Intermediate state: AST                             Into virtual machine V8
 //     |      Intermadiate state: HIR                  Into virtual machine V8
 //     |      Intermediate state: LIR                  Into virtual machine V8
