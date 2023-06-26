@@ -3,3 +3,6 @@ alt + insert - open menu to autogenerate
 
 msvm - write public static void main method
 sout - write System.out.println
+
+To install libraries use Ctrl+Alt+Shift+S -> Libraries -> + -> From maven ->
+-> Enter library name, for example org.ow2.asm

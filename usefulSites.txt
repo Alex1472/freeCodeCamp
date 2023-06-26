@@ -7,6 +7,7 @@ https://www.tutorialspoint.com/java/ - java tutorials
 http://www.angelikalanger.com/ - java, under the hood of compiler
 https://jenkov.com/ - deep java tutorial
 https://www.youtube.com/@PowerCertAnimatedVideos - good hardware channel
+https://tldp.org/LDP/Bash-Beginners-Guide/html/index.html - bash tutorial
 
 Courses, trainers:
 https://cssbattle.dev/  -  css battle, create images with css
